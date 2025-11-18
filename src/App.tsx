@@ -1,12 +1,16 @@
 import React from 'react';
 
-import './App.css';
-import Card from './lib/dto/Card';
-import { cardFactory } from './lib/container';
-
+import './App.css'
+import Card from './lib/dto/Card'
+import { cardFactory } from './lib/container'
+import { IDCodec } from "./lib/encoding/id-codec"
 
 
 function App() {
+  const ids = [5,5,10,10,15,1000,1000]
+  const encodedString = IDCodec.encodeToString(ids);
+  const decoded = IDCodec.decodeFromString(encodedString);
+
   let result: string
   try {
     const card: Card = cardFactory.build(
@@ -51,6 +55,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         {result}
+        <div>
+        encoded {ids.join(', ')} = {encodedString}
+        <br />
+        Decoded = {decoded.join(', ')}
+      </div>
       </header>
     </div>
   );
