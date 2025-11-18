@@ -1,23 +1,56 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+import Card from './lib/dto/Card';
+import { cardFactory } from './lib/container';
+
+
 
 function App() {
+  let result: string
+  try {
+    const card: Card = cardFactory.build(
+    {
+      id: 1,
+      name: "Fateful strike",
+      attributes: [
+        {
+          name: "type",
+          type: "string",
+          value: "attack",
+        },
+        {
+          name: "tags",
+          type: "string[]",
+          value: ["good"]
+        },
+        {
+          name: "damage",
+          type: "number",
+          value: 5,
+        },
+        {
+          name: "health",
+          type: "number[]",
+          value: [1, 2, 3],
+        },
+        {
+          name: "ultimate",
+          type: "boolean",
+          value: false,
+        },
+      ]
+    })
+    result =  String(JSON.stringify(card))
+  } catch (e) {
+    const error: Error = e as Error
+    
+    result = error.message
+  }
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {result}
       </header>
     </div>
   );
