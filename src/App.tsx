@@ -1,8 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 import './App.css'
-import Card from './lib/dto/Card'
-import { cardFactory } from './lib/container'
+import ivionJson from "./definitions/ivion.json"
+import Game from './lib/dto/Game'
+import { gameFactory } from './lib/container'
 import { IDCodec } from "./lib/encoding/id-codec"
 
 
@@ -13,55 +14,22 @@ function App() {
 
   let result: string
   try {
-    const card: Card = cardFactory.build(
-    {
-      id: 1,
-      name: "Fateful strike",
-      attributes: [
-        {
-          name: "type",
-          type: "string",
-          value: "attack",
-        },
-        {
-          name: "tags",
-          type: "string[]",
-          value: ["good"]
-        },
-        {
-          name: "damage",
-          type: "number",
-          value: 5,
-        },
-        {
-          name: "health",
-          type: "number[]",
-          value: [1, 2, 3],
-        },
-        {
-          name: "ultimate",
-          type: "boolean",
-          value: false,
-        },
-      ]
-    })
-    result =  String(JSON.stringify(card))
+    const game: Game = gameFactory.build(ivionJson)
+    result =  `${JSON.stringify(game,  null, "  ")}`
   } catch (e) {
     const error: Error = e as Error
     
     result = error.message
   }
   return (
-    <div className="App">
-      <header className="App-header">
-        {result}
-        <div>
-        encoded {ids.join(', ')} = {encodedString}
-        <br />
+    <>
+      <pre>{result}</pre>
+      <pre>
+        Encoded {ids.join(', ')} = {encodedString}
+        <br></br>
         Decoded = {decoded.join(', ')}
-      </div>
-      </header>
-    </div>
+      </pre>
+    </>
   );
 }
 

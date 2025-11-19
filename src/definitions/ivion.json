@@ -1,0 +1,83 @@
+{
+    "name": "Ivion",
+    "cards": [
+        {
+            "id": 1,
+            "name": "Chastise",
+            "attributes": [
+                {
+                    "name": "type",
+                    "type": "string",
+                    "value": "ability"
+                }, {
+                    "name": "class",
+                    "type": "string",
+                    "value": "knight"
+                }, {
+                    "name": "action",
+                    "type": "number",
+                    "value": -1
+                }, {
+                    "name": "range",
+                    "type": "number",
+                    "value": 2
+                }, {
+                    "name": "power",
+                    "type": "number",
+                    "value": 1
+                }, {
+                    "name": "control",
+                    "type": "string[]",
+                    "value": ["disarm"]
+                }, {
+                    "name": "effect",
+                    "type": "string",
+                    "value": "Silence 3 [silence] target uncontrolled opponent."
+                }, {
+                    "name": "flavor",
+                    "type": "string",
+                    "value": "It is not their place to stand against Her.\nTeach them this,"
+                }, {
+                    "name": "isInstant",
+                    "type": "boolean",
+                    "value": false
+                }, {
+                    "name": "isUltimate",
+                    "type": "boolean",
+                    "value": false
+                }, {
+                    "name": "edition",
+                    "type": "string",
+                    "value": "second"
+                }
+            ]
+        }
+    ],
+    "attributes": [
+        {
+            
+        }
+    ],
+    "validationRules": [
+        {
+            "type": "enum",
+            "attribute": "type",
+            "enum": ["ability", "attack", "passive", "debuff", "aura", "instant", "buff", "travel"]
+        }, {
+            "type": "enum",
+            "attribute": "class",
+            "enum": ["knight"]
+        }, {
+            "type": "requiredAttributes",
+            "attributes": ["type", "action", "power"]
+        }, {
+            "type": "enum",
+            "attribute": "control",
+            "enum": ["disarm", "silence", "slow"]
+        }, {
+            "type": "enum",
+            "attribute": "edition",
+            "enum": ["first", "second"]
+        }
+    ]
+}
