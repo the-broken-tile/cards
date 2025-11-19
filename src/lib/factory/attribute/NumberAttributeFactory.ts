@@ -1,4 +1,4 @@
-import Attribute from "../dto/Attribute";
+import Attribute from "../../dto/Attribute";
 import AttributeFactoryInterface from "./AttributeFactoryInterface";
 
 export default class NumberAttributeFactory implements AttributeFactoryInterface {

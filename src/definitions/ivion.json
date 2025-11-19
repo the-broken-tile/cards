@@ -1,5 +1,53 @@
 {
     "name": "Ivion",
+    "attributes": [
+        {
+            "name": "type",
+            "type": "string",
+            "enum": ["ability", "attack", "passive", "debuff", "aura", "instant", "buff", "travel"],
+            "required": true
+        }, {
+            "name": "class",
+            "type": "string",
+            "enum": ["knight", "cryomancer", "druid", "sorcerer", "warrior", "wizard"]
+        }, {
+            "name": "specification",
+            "type": "string",
+            "enum": ["Ancient"],
+            "conflicts": "class"
+        }, {
+            "name": "action",
+            "type": "number",
+            "required": true
+        }, {
+            "name": "range",
+            "type": "number"
+        }, {
+            "name": "power",
+            "type": "number",
+            "required": true
+        }, {
+            "name": "control",
+            "type": "string[]",
+            "enum": ["slow", "silence", "disarm"]
+        }, {
+            "name": "effect",
+            "type": "string"
+        }, {
+            "name": "flavor",
+            "type": "string"
+        }, {
+            "name": "isInstant",
+            "type": "boolean"
+        }, {
+            "name": "isUltimate",
+            "type": "boolean"
+        }, {
+            "name": "edition",
+            "type": "string",
+            "enum": ["first", "second"]
+        }
+    ],
     "cards": [
         {
             "id": 1,
@@ -7,77 +55,58 @@
             "attributes": [
                 {
                     "name": "type",
-                    "type": "string",
                     "value": "ability"
                 }, {
                     "name": "class",
-                    "type": "string",
                     "value": "knight"
                 }, {
                     "name": "action",
-                    "type": "number",
                     "value": -1
                 }, {
                     "name": "range",
-                    "type": "number",
                     "value": 2
                 }, {
                     "name": "power",
-                    "type": "number",
                     "value": 1
                 }, {
                     "name": "control",
-                    "type": "string[]",
                     "value": ["disarm"]
                 }, {
                     "name": "effect",
-                    "type": "string",
                     "value": "Silence 3 [silence] target uncontrolled opponent."
                 }, {
                     "name": "flavor",
-                    "type": "string",
                     "value": "It is not their place to stand against Her.\nTeach them this,"
                 }, {
                     "name": "isInstant",
-                    "type": "boolean",
                     "value": false
                 }, {
                     "name": "isUltimate",
-                    "type": "boolean",
                     "value": false
                 }, {
                     "name": "edition",
-                    "type": "string",
                     "value": "second"
                 }
             ]
-        }
-    ],
-    "attributes": [
+        },
         {
-            
-        }
-    ],
-    "validationRules": [
-        {
-            "type": "enum",
-            "attribute": "type",
-            "enum": ["ability", "attack", "passive", "debuff", "aura", "instant", "buff", "travel"]
-        }, {
-            "type": "enum",
-            "attribute": "class",
-            "enum": ["knight"]
-        }, {
-            "type": "requiredAttributes",
-            "attributes": ["type", "action", "power"]
-        }, {
-            "type": "enum",
-            "attribute": "control",
-            "enum": ["disarm", "silence", "slow"]
-        }, {
-            "type": "enum",
-            "attribute": "edition",
-            "enum": ["first", "second"]
+            "id": 2,
+            "name": "Clean thy Blade",
+            "attributes": [
+                {
+                    "name": "type",
+                    "value": "ability"
+                }, {
+                    "name": "class",
+                    "value": "knight"
+                }, {
+                    "name": "action",
+                    "value": 0
+                }, {
+                    "name": "power",
+                    "value": -2
+                }
+            ]
         }
     ]
 }

@@ -4,7 +4,6 @@ declare type BaseAttribute = {
     readonly name: string
     readonly type: AttributeType
 }
-
 declare type StringAttribute = BaseAttribute & {
     readonly type: "string"
     readonly value: string

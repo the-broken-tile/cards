@@ -5,6 +5,7 @@ import ValidationRule from "./ValidationRule"
 declare type Game = {
     name: string
     cards: Card[]
+    attributes: Attribute[]
     validationRules: ValidationRule[]
 }
 
