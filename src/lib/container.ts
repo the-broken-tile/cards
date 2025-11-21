@@ -23,6 +23,9 @@ import AttributeRequiredIfAnotherMissingValidator from "./validation/AttributeRe
 import UniqueAttributeNamesValidator from "./validation/UniqueAttributeNamesValidator"
 import EntitiesFactory from "./factory/EntitiesFactory"
 import EntityFactory from "./factory/EntityFactory"
+import EntityMapper from "./factory/EntityMapper"
+import EnumAttributeFactory from "./factory/attribute/EnumAttributeFactory"
+import EntityAttributeFactory from "./factory/attribute/EntityAttributeFactory"
 
 const validationRuleFactory: ValidationRuleFactory = new ValidationRuleFactory([
   new AttributeDefinitionEnumValidationFactory(),
@@ -33,7 +36,8 @@ const validationRuleFactory: ValidationRuleFactory = new ValidationRuleFactory([
 
 const attributeFactory: AttributeFactory = new AttributeFactory({
   "string": new StringAttributeFactory(),
-  "enum": new StringAttributeFactory(),
+  "enum": new EnumAttributeFactory(),
+  "entity": new EntityAttributeFactory(),
   "string[]": new ArrayOfStringsAttributeFactory(),
   "number": new NumberAttributeFactory(),
   "number[]": new ArrayOfNumbersAttributeFactory(),
@@ -63,6 +67,7 @@ const gameFactory: GameFactory = new GameFactory(
   attributeDefinitionFactory,
   validationRuleFactory,
   entityFactory,
+  new EntityMapper(),
   [
     { type: "uniqueIds" },
     { type: "uniqueAttributeNames" },

@@ -1,5 +1,5 @@
-import AttributeType from "./AttributeType";
+import AttributeType from "./AttributeType"
 
-declare type AttributeDefinitionType = AttributeType | "enum"
+declare type AttributeDefinitionType = AttributeType
 
 export default AttributeDefinitionType

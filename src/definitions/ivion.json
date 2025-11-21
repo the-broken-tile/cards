@@ -9,7 +9,7 @@
     },
     {
       "name": "class",
-      "type": "string",
+      "type": "entity",
       "enum": ["Knight", "Cryomancer", "Druid", "Sorcerer", "Warrior", "Wizard"],
       "conflicts": "specification",
       "requiredIfMissing": "specification"

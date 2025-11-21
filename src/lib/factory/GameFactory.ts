@@ -8,6 +8,7 @@ import ValidationRuleFactory from "./validation/ValidationRuleFactory"
 import ValidationRule from "../dto/ValidationRule"
 import EntitiesFactory from "./EntitiesFactory"
 import Entity from "../dto/Entity"
+import EntityMapper from "./EntityMapper"
 
 export default class GameFactory {
   constructor(
@@ -16,6 +17,7 @@ export default class GameFactory {
     private readonly attributeDefinitionFactory: AttributeDefinitionFactory,
     private readonly validationRuleFactory: ValidationRuleFactory,
     private readonly entitiesFactory: EntitiesFactory,
+    private readonly entityMapper: EntityMapper,
     private readonly gameValidationRules: ValidationRule[],
   ) {}
 
@@ -46,6 +48,7 @@ export default class GameFactory {
     }
 
     this.validator.validate(game)
+    this.entityMapper.map(game)
 
     return game
   }

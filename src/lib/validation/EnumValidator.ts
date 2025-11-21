@@ -20,18 +20,21 @@ export default class EnumValidator implements CardValidatorInterface {
             throw new Error(`[EnumValidator] Invalid enum, not an array.`)
         }
 
-        if (attribute.type === "string") {
+        if (attribute.type !== "enum") {
+          return
+        }
+
+        if (typeof attribute.value === "string") {
             if (!rule.enum.includes(attribute.value)) {
                 throw new Error(`[EnumValidator Invalid value "${attribute.value}" for attribute "${attribute.name}". Allowed values are: ["${rule.enum.join(", ")}"]`)
             }
         }
 
-        if (attribute.type === "string[]") {
-            const invalidValues: string[] = attribute.value.filter((attribute: string): boolean => !rule.enum.includes(attribute))
-
-            if (invalidValues.length > 0) {
-                throw new Error(`[EnumValidator] Invalid value "${invalidValues.join(", ")}" for attributes "${attribute.name}". Allowed values are: ["${rule.enum.join(", ")}"]`)
-            }
+        if (Array.isArray(attribute.value)) {
+          const invalidValues: string[] = attribute.value.filter((attribute: string): boolean => !rule.enum.includes(attribute))
+          if (invalidValues.length > 0) {
+              throw new Error(`[EnumValidator] Invalid value "${invalidValues.join(", ")}" for attributes "${attribute.name}". Allowed values are: ["${rule.enum.join(", ")}"]`)
+          }
         }
     }
 }
