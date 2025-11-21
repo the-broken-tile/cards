@@ -18,11 +18,15 @@ import AttributeDefinitionEnumValidationFactory from "./factory/validation/Attri
 import ConflictsValidationRuleFactory from "./factory/validation/ConflictsValidationRuleFactory"
 import DummyValidator from "./validation/DummyValidator";
 import DuplicateIdValidator from "./validation/DuplicateIdValidator";
+import RequiredIfMissingValidationRuleFactory from "./factory/validation/RequiredIfMissingValidationRuleFactory";
+import AttributeRequiredIfAnotherMissingValidator from "./validation/AttributeRequiredIfAnotherMissingValidator";
+import UniqueAttributeNamesValidator from "./validation/UniqueAttributeNamesValidator";
 
 const validationRuleFactory: ValidationRuleFactory = new ValidationRuleFactory([
   new AttributeDefinitionEnumValidationFactory(),
   new AttributeDefinitionRequiredValidationRuleFactory(),
   new ConflictsValidationRuleFactory(),
+  new RequiredIfMissingValidationRuleFactory(),
 ])
 
 const cardFactory: CardFactory = new CardFactory(
@@ -40,7 +44,9 @@ const validator: Validator = new Validator({
     "enum": new EnumValidator(),
     "dependency": new DependencyValidator(),
     "requiredAttributes": new RequiredAttributesValidator(),
-    "uniqueIds": new DummyValidator(),
+    "requiredIfMissing": new AttributeRequiredIfAnotherMissingValidator(),
+    "uniqueAttributeNames": new UniqueAttributeNamesValidator(),
+    "uniqueIds": new DummyValidator(), // @todo change this
   },
   [
     new DuplicateIdValidator(),
@@ -55,7 +61,8 @@ const gameFactory: GameFactory = new GameFactory(
   attributeDefinitionFactory,
   validationRuleFactory,
   [
-    {type: "uniqueIds"}
+    { type: "uniqueIds" },
+    { type: "uniqueAttributeNames" },
   ]
 )
 

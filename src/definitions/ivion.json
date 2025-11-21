@@ -10,7 +10,9 @@
     {
       "name": "class",
       "type": "string",
-      "enum": ["Knight", "Cryomancer", "Druid", "Sorcerer", "Warrior", "Wizard"]
+      "enum": ["Knight", "Cryomancer", "Druid", "Sorcerer", "Warrior", "Wizard"],
+      "conflicts": "specification",
+      "requiredIfMissing": "specification"
     },
     {
       "name": "specification",
@@ -41,17 +43,18 @@
         "Wilder",
         "Winterborn"
       ],
-      "conflicts": "class"
+      "conflicts": "class",
+      "requiredIfMissing": "class"
     },
     {"name": "action", "type": "number", "required": true},
     {"name": "range", "type": "number"},
     {"name": "power", "type": "number", "required": true},
-    {"name": "control", "type": "string[]", "enum": ["slow", "silence", "disarm"]},
+    {"name": "control", "type": "string[]", "enum": ["slow", "silence", "disarm"], "required": true},
     {"name": "effect", "type": "string", "required":  true},
-    {"name": "flavor", "type": "string"},
     {"name": "isInstant", "type": "boolean"},
     {"name": "isUltimate", "type": "boolean"},
-    {"name": "edition", "type": "string", "enum": ["first", "second"], "required":  true}
+    {"name": "edition", "type": "string", "enum": ["first", "second"], "required": true},
+    {"name": "flavor", "type": "string"}
   ],
   "cards": [
     {
@@ -65,10 +68,10 @@
         {"name": "power", "value": 1},
         {"name": "control", "value": ["disarm"]},
         {"name": "effect", "value": "Silence 3 [silence] target uncontrolled opponent."},
-        {"name": "flavor", "value": "It is not their place to stand against Her.\nTeach them this,@todo"},
         {"name": "isInstant", "value": false},
         {"name": "isUltimate", "value": false},
-        {"name": "edition", "value": "second"}
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "It is not their place to stand against Her.\nTeach them this,@todo"}
       ]
     },
     {
@@ -79,10 +82,10 @@
         {"name": "class", "value": "Knight"},
         {"name": "action", "value": 0},
         {"name": "power", "value": -2},
+        {"name": "control", "value": ["silence", "disarm"]},
         {"name": "effect", "value": "Draw a card for each attack card you’ve resolved this turn.\nBecome chivalrous."},
-        {"name": "flavor", "value": "A clean blade is a keen blade."},
         {"name": "edition", "value": "second"},
-        {"name": "control", "value": ["silence", "disarm"]}
+        {"name": "flavor", "value": "A clean blade is a keen blade."}
       ]
     },
     {
@@ -90,12 +93,263 @@
       "name": "Daring Strike",
       "attributes": [
         {"name": "type", "value": "attack"},
+        {"name": "class", "value": "Knight"},
         {"name": "action", "value": -1},
         {"name": "power", "value": 1},
         {"name": "range", "value": 1},
+        {"name": "control", "value": []},
         {"name": "effect", "value":  "Deal 4 damage to target enemy.\nStun them."},
         {"name": "edition", "value": "second"},
         {"name": "flavor", "value": "Knights have been called unwise.\nStupid. But never coward."}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Enchanted Lake",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -1},
+        {"name": "power", "value": 1},
+        {"name": "control", "value": ["silence"]},
+        {"name": "effect", "value": "Attach to target tile.\nAt the start of your turn, you may make a tile near Enchanted Lake enchanted terrain."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "Such beauty is found only in Calbria."}
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Enchanted Strike",
+      "attributes": [
+        {"name": "type", "value": "attack"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -1},
+        {"name": "power", "value": 1},
+        {"name": "range", "value": 1},
+        {"name": "control", "value": ["silence", "disarm"]},
+        {"name": "effect", "value": "Deal 5 damage to target enemy.\nMake a tile near you enchanted terrain."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "Where prowess and splendor meet, there is the knight."}
+      ]
+    },
+    {
+      "id": 6,
+      "name": "For the King",
+      "attributes": [
+        {"name": "type", "value": "attack"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -2},
+        {"name": "power", "value": 2},
+        {"name": "range", "value": 1},
+        {"name": "control", "value": ["disarm"]},
+        {"name": "effect", "value": "Deal 5 damage to target enemy.\nSlow 3 [slow] them."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "\"For King Roderic Mayfel!\""}
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Have at Thee",
+      "attributes": [
+        {"name": "type", "value": "attack"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -2},
+        {"name": "power", "value": 2},
+        {"name": "range", "value": 1},
+        {"name": "control", "value": ["disarm"]},
+        {"name": "effect", "value": "Deal 7 damage to target enemy.\nBecome chivalrous."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "She fought with honor. That, and countless hours of training"}
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Have Faith",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": 0},
+        {"name": "power", "value": -2},
+        {"name": "control", "value": ["disarm"]},
+        {
+          "name": "effect",
+          "value": "Attach to yourself until your next turn.\nIf you would take damage, instead prevent that damage and put that many cards from the top of your deck into your discard pile."
+        },
+        {"name": "edition", "value": "second"}
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Holy Ground",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -1},
+        {"name": "power", "value": 1},
+        {"name": "range", "value": 2},
+        {"name": "control", "value": ["silence"]},
+        {"name": "effect", "value": "Make two target tile enchanted terrain.\nDraw a card."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "There are holy sites in Calbria where it is said that no lies may be told."}
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Humble",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": 0},
+        {"name": "power", "value": -1},
+        {"name": "range", "value": 2},
+        {"name": "control", "value": ["silence"]},
+        {"name": "effect", "value": "Choose one:\n- Destroy target card.\n- Each player discards down to four cards."},
+        {"name": "edition", "value": "second"}
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Judgement",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -1},
+        {"name": "power", "value": 2},
+        {"name": "range", "value": 2},
+        {"name": "control", "value": ["silence"]},
+        {"name": "effect", "value": "Attach to target opponent.\nAfter they dishonor the code of chivalry, deal 2 damage to them."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "The Lady watches diligently through the eyes of her chosen."}
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Justice",
+      "attributes": [
+        {"name": "type", "value": "attack"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -2},
+        {"name": "power", "value": -2},
+        {"name": "range", "value": 1},
+        {"name": "control", "value": ["disarm"]},
+        {"name": "effect", "value": "Deal 10 damage to target enemy.\nSlow 2 [slow] and Silence 2 [silence] them."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "Let light was from your blade\nand cut away the night."}
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Light of Dawn",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -2},
+        {"name": "power", "value": 2},
+        {"name": "control", "value": ["silence"]},
+        {"name": "effect", "value": "Gain a random relic.\nIf you’ve already gained arelic this game, instead deal 5 damage to each opponent."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "The darkest hour comes\njust before the dawn"}
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Oathstone",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -1},
+        {"name": "power", "value": 1},
+        {"name": "range", "value": 2},
+        {"name": "control", "value":  ["silence"]},
+        {"name": "effect", "value": "Attach to target empty tile.\nOpponents near Oathstone can’t expend or pay [initiative]."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "Even the wicked are compelled to work no treachery in its shadow."}
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Proclaim",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -1},
+        {"name": "power", "value": 2},
+        {"name": "control", "value": ["disarm"]},
+        {"name": "effect", "value": "Become chivalrous."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "A vow is more than a promise.\nIt is a way of life."}
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Providence",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": 0},
+        {"name": "power", "value": -2},
+        {"name": "control", "value": []},
+        {"name": "effect", "value": "Heal yourself 4 HP.\nAfter Providence is sent to the discard, draw a card."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "The greatest heroes are forged by darkest rituals."}
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Rebuke",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": 0},
+        {"name": "power", "value": -2},
+        {"name": "range", "value": 1},
+        {"name": "control", "value": ["slow", "silence", "disarm"]},
+        {"name": "effect", "value": "Counter target card unless its controller pays 3 resources.\nIf the card is countered disarm 3 them."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "The guilty are not always repentant."}
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Reliquary",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -1},
+        {"name": "power", "value": -2},
+        {"name": "control", "value": ["silence"]},
+        {"name": "effect", "value": "You must be chivalrous to play Reliquary.\nGain a random relic."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "Take your prize.\nIt may be just what you need."}
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Stand Aside",
+      "attributes": [
+        {"name": "type", "value": "attack"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -1},
+        {"name": "power", "value": -1},
+        {"name": "range", "value": 1},
+        {"name": "control", "value": ["slow", "disarm"]},
+        {"name": "effect", "value": "Deal 6 damage to target enemy.\nYou may travel them one tile."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "The crossroads of Calbria abound with ruffians keen on prey."}
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Throw the Gauntlet",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -1},
+        {"name": "power", "value": 1},
+        {"name": "control", "value": ["slow"]},
+        {"name": "effect", "value": "Travel another target character one tile towards you, then travel one tile towards them."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "Battle approaches.\nMake your name known."}
       ]
     }
   ]

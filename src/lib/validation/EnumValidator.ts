@@ -6,7 +6,7 @@ import CardValidatorInterface from "./CardValidatorInterface"
 export default class EnumValidator implements CardValidatorInterface {
     public validate(card: Card, rule: ValidationRule): void | never {
         if (rule.type !== "enum") {
-            throw new Error(`[EnumValidator] Miss-configured validation rule of type ${rule.type} for EnumValidator.`)
+            throw new Error(`[EnumValidator] Miss-configured validation rule of type ${rule.type}.`)
         }
 
         const attribute: Attribute | undefined = card.attributes.find((a: Attribute): boolean => a.name === rule.attribute)

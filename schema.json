@@ -9,7 +9,9 @@
         "properties": {
           "name": { "type": "string" },
           "type": { "type": "string" },
-          "enum": { "type": "array", "items": {"type": "string"} }
+          "enum": { "type": "array", "items": {"type": "string"} },
+          "conflicts": { "type": "string" },
+          "requiredIfMissing": { "type": "string" }
         },
         "required": ["name", "type"]
       }

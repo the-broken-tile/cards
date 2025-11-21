@@ -4,7 +4,6 @@ import ValidationRule from "../dto/ValidationRule"
 
 export default class DuplicateIdValidator implements GameValidatorInterface {
   public  validate(game: Game): void {
-    console.log(game.validationRules)
     if (!game.validationRules.find((r: ValidationRule): boolean => r.type === "uniqueIds")) {
       return
     }
