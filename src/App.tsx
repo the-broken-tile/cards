@@ -1,43 +1,49 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
-import game from "./definitions/ivion.json"
+import ivionJson from "./definitions/ivion.json"
 import Game from './lib/dto/Game'
 import { gameFactory } from './lib/container'
 import { IDCodec } from "./lib/encoding/id-codec"
 
-const encodingTest = () => {
-  const ids: number[] = [5, 5, 10, 10, 15, 1000, 1000]
-  const encodedString: string = IDCodec.encodeToString(ids);
-  const decoded: number[] = IDCodec.decodeFromString(encodedString);
-
-  //<pre>
-  // Encoded {ids.join(', ')} = {encodedString}
-  // <br></br>
-  // Decoded = {decoded.join(', ')}
-  // </pre>
-  return { ids, encodedString, decoded }
-}
-
 const App = () => {
-  const parseInput = (i: Record<string, any>): string => {
-    let result: string
+  const [game, setGame] = useState<Game|null>(null)
+  const [error, setError] = useState<string|null>(null)
+
+  useEffect((): void => {
     try {
-      const game: Game = gameFactory.build(i)
-      result =  `${JSON.stringify(game,  null, "  ")}`
+      setGame(gameFactory.build(ivionJson))
     } catch (e) {
-      const error: Error = e as Error
-      result = error.message
+      setError((e as Error).message)
+    }
+  }, [])
+
+  const quadripleIds = (): number[] => {
+    if (game === null) {
+      return []
     }
 
-    return result
+    return game.cards.map(card => card.id)
+      .reduce((carry: number[], id: number): number[] => {
+        return [...carry, id, id, id, id]
+      }, [])
   }
 
+  if (error !== null) {
+    return <>Error: {error}</>
+  }
+
+  if (game === null) {
+    return <>"Loading"</>
+  }
 
   return (
     <div className="app">
-      <pre className="halfsies">{parseInput(game)}</pre>
+      <div>Encoded all 4x ids: {IDCodec.encodeToString(quadripleIds())}</div>
+      <br />
+      <div>Decoded all 4x ids: {IDCodec.decodeFromString(IDCodec.encodeToString(quadripleIds())).join(", ")}</div>
+      <pre>{JSON.stringify(game,  null, "  ")}</pre>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
