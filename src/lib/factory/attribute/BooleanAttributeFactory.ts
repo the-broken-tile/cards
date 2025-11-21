@@ -5,7 +5,7 @@ export default class BooleanAttributeFactory implements AttributeFactoryInterfac
     public build(name: string, payload: Record<string, any>): Attribute {
         const type: string = typeof payload.value
         if (type !== "boolean") {
-            throw new Error(`Invalid attribute type ${type} for attribute ${name}.`)
+            throw new Error(`[BooleanAttributeFactory] Invalid attribute type ${type} for attribute ${name}.`)
         }
         
         return {

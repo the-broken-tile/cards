@@ -1,7 +1,11 @@
-import ValidationType from "./ValidationType"
+import ValidationType from "./CardValidationType"
 
 export type BaseValidationRule = {
     readonly type: ValidationType
+}
+
+export type UniqueIdsRule = BaseValidationRule & {
+  readonly type: "uniqueIds"
 }
 
 export type DependentValidationRule = BaseValidationRule & {
@@ -23,6 +27,6 @@ export type RequiredAttributesRule = BaseValidationRule & {
     readonly attributes: string[]
 }
 
-type ValidationRule = DependentValidationRule | EnumValidationRule | RequiredAttributesRule
+type ValidationRule = DependentValidationRule | EnumValidationRule | RequiredAttributesRule | UniqueIdsRule
 
 export default ValidationRule

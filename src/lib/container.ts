@@ -11,16 +11,18 @@ import AttributeDefinitionRequiredValidationRuleFactory from "./factory/validati
 
 import Validator from "./validation/Validator"
 import EnumValidator from "./validation/EnumValidator"
-import DepdencyValidator from "./validation/DepdendencyValidator"
-import RequiredAttributesValidadator from "./validation/RequiredAttributesValidator"
+import DependencyValidator from "./validation/DepdendencyValidator"
+import RequiredAttributesValidator from "./validation/RequiredAttributesValidator"
 import ValidationRuleFactory from "./factory/validation/ValidationRuleFactory"
 import AttributeDefinitionEnumValidationFactory from "./factory/validation/AttributeDefinitionEnumValidationFactory"
 import ConflictsValidationRuleFactory from "./factory/validation/ConflictsValidationRuleFactory"
+import DummyValidator from "./validation/DummyValidator";
+import DuplicateIdValidator from "./validation/DuplicateIdValidator";
 
 const validationRuleFactory: ValidationRuleFactory = new ValidationRuleFactory([
-    new AttributeDefinitionEnumValidationFactory(),
-    new AttributeDefinitionRequiredValidationRuleFactory(),
-    new ConflictsValidationRuleFactory(),
+  new AttributeDefinitionEnumValidationFactory(),
+  new AttributeDefinitionRequiredValidationRuleFactory(),
+  new ConflictsValidationRuleFactory(),
 ])
 
 const cardFactory: CardFactory = new CardFactory(
@@ -36,13 +38,26 @@ const cardFactory: CardFactory = new CardFactory(
 
 const validator: Validator = new Validator({
     "enum": new EnumValidator(),
-    "dependency": new DepdencyValidator(),
-    "requiredAttributes": new RequiredAttributesValidadator(),
-})
+    "dependency": new DependencyValidator(),
+    "requiredAttributes": new RequiredAttributesValidator(),
+    "uniqueIds": new DummyValidator(),
+  },
+  [
+    new DuplicateIdValidator(),
+  ],
+)
 
-const attributeDefintionFacotry: AttributeDefinitionFactory = new AttributeDefinitionFactory()
+const attributeDefinitionFactory: AttributeDefinitionFactory = new AttributeDefinitionFactory()
 
-const gameFactory: GameFactory = new GameFactory(cardFactory, validator, attributeDefintionFacotry, validationRuleFactory)
+const gameFactory: GameFactory = new GameFactory(
+  cardFactory,
+  validator,
+  attributeDefinitionFactory,
+  validationRuleFactory,
+  [
+    {type: "uniqueIds"}
+  ]
+)
 
 export {
     cardFactory,

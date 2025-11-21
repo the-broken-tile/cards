@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "attributes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "enum": { "type": "array", "items": {"type": "string"} }
+        },
+        "required": ["name", "type"]
+      }
+    },
+    "cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "name": { "type": "string" },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "value": { "type": ["string", "number", "array", "boolean"]}
+              }
+            }
+          }
+        },
+        "required": ["id", "name", "attributes"]
+      }
+    }
+  },
+  "required": ["name", "attributes", "cards"]
+}

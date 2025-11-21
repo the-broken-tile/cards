@@ -1,4 +1,4 @@
 
-declare type AttributeType  = "string" | "number" | "string[]" | "number[]" | "boolean"
+declare type AttributeType = "string" | "number" | "string[]" | "number[]" | "boolean"
 
 export default AttributeType

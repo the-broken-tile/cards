@@ -1,112 +1,102 @@
 {
-    "name": "Ivion",
-    "attributes": [
-        {
-            "name": "type",
-            "type": "string",
-            "enum": ["ability", "attack", "passive", "debuff", "aura", "instant", "buff", "travel"],
-            "required": true
-        }, {
-            "name": "class",
-            "type": "string",
-            "enum": ["knight", "cryomancer", "druid", "sorcerer", "warrior", "wizard"]
-        }, {
-            "name": "specification",
-            "type": "string",
-            "enum": ["Ancient"],
-            "conflicts": "class"
-        }, {
-            "name": "action",
-            "type": "number",
-            "required": true
-        }, {
-            "name": "range",
-            "type": "number"
-        }, {
-            "name": "power",
-            "type": "number",
-            "required": true
-        }, {
-            "name": "control",
-            "type": "string[]",
-            "enum": ["slow", "silence", "disarm"]
-        }, {
-            "name": "effect",
-            "type": "string"
-        }, {
-            "name": "flavor",
-            "type": "string"
-        }, {
-            "name": "isInstant",
-            "type": "boolean"
-        }, {
-            "name": "isUltimate",
-            "type": "boolean"
-        }, {
-            "name": "edition",
-            "type": "string",
-            "enum": ["first", "second"]
-        }
-    ],
-    "cards": [
-        {
-            "id": 1,
-            "name": "Chastise",
-            "attributes": [
-                {
-                    "name": "type",
-                    "value": "ability"
-                }, {
-                    "name": "class",
-                    "value": "knight"
-                }, {
-                    "name": "action",
-                    "value": -1
-                }, {
-                    "name": "range",
-                    "value": 2
-                }, {
-                    "name": "power",
-                    "value": 1
-                }, {
-                    "name": "control",
-                    "value": ["disarm"]
-                }, {
-                    "name": "effect",
-                    "value": "Silence 3 [silence] target uncontrolled opponent."
-                }, {
-                    "name": "flavor",
-                    "value": "It is not their place to stand against Her.\nTeach them this,"
-                }, {
-                    "name": "isInstant",
-                    "value": false
-                }, {
-                    "name": "isUltimate",
-                    "value": false
-                }, {
-                    "name": "edition",
-                    "value": "second"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "name": "Clean thy Blade",
-            "attributes": [
-                {
-                    "name": "type",
-                    "value": "ability"
-                }, {
-                    "name": "class",
-                    "value": "knight"
-                }, {
-                    "name": "action",
-                    "value": 0
-                }, {
-                    "name": "power",
-                    "value": -2
-                }
-            ]
-        }
-    ]
+  "name": "Ivion",
+  "attributes": [
+    {
+      "name": "type",
+      "type": "string",
+      "enum": ["ability", "attack", "passive", "debuff", "aura", "instant", "buff", "travel"],
+      "required": true
+    },
+    {
+      "name": "class",
+      "type": "string",
+      "enum": ["Knight", "Cryomancer", "Druid", "Sorcerer", "Warrior", "Wizard"]
+    },
+    {
+      "name": "specification",
+      "type": "string",
+      "enum": [
+        "Ancient",
+        "Archmage",
+        "Avatar",
+        "Baron",
+        "Curseblade",
+        "Ebon Mage",
+        "Enchantress",
+        "Errant",
+        "Executioner",
+        "Fletcher",
+        "Friar",
+        "Huntsman",
+        "Illusionist",
+        "Incarnate",
+        "Invoker",
+        "Jarl",
+        "Poacher",
+        "Ruffian",
+        "Saint",
+        "Steward",
+        "Survivalist",
+        "Watcher",
+        "Wilder",
+        "Winterborn"
+      ],
+      "conflicts": "class"
+    },
+    {"name": "action", "type": "number", "required": true},
+    {"name": "range", "type": "number"},
+    {"name": "power", "type": "number", "required": true},
+    {"name": "control", "type": "string[]", "enum": ["slow", "silence", "disarm"]},
+    {"name": "effect", "type": "string", "required":  true},
+    {"name": "flavor", "type": "string"},
+    {"name": "isInstant", "type": "boolean"},
+    {"name": "isUltimate", "type": "boolean"},
+    {"name": "edition", "type": "string", "enum": ["first", "second"], "required":  true}
+  ],
+  "cards": [
+    {
+      "id": 1,
+      "name": "Chastise",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -1},
+        {"name": "range", "value": 2},
+        {"name": "power", "value": 1},
+        {"name": "control", "value": ["disarm"]},
+        {"name": "effect", "value": "Silence 3 [silence] target uncontrolled opponent."},
+        {"name": "flavor", "value": "It is not their place to stand against Her.\nTeach them this,@todo"},
+        {"name": "isInstant", "value": false},
+        {"name": "isUltimate", "value": false},
+        {"name": "edition", "value": "second"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Clean thy Blade",
+      "attributes": [
+        {"name": "type", "value": "ability"},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": 0},
+        {"name": "power", "value": -2},
+        {"name": "effect", "value": "Draw a card for each attack card you’ve resolved this turn.\nBecome chivalrous."},
+        {"name": "flavor", "value": "A clean blade is a keen blade."},
+        {"name": "edition", "value": "second"},
+        {"name": "control", "value": ["silence", "disarm"]}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Daring Strike",
+      "attributes": [
+        {"name": "type", "value": "attack"},
+        {"name": "action", "value": -1},
+        {"name": "power", "value": 1},
+        {"name": "range", "value": 1},
+        {"name": "effect", "value":  "Deal 4 damage to target enemy.\nStun them."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "Knights have been called unwise.\nStupid. But never coward."}
+      ]
+    }
+  ]
 }

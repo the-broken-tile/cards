@@ -12,6 +12,9 @@ code {
     monospace;
 }
 
+.app {
+    display: flex;
+}
 .halfsies {
   width: 50vw;
   height: 100vh;

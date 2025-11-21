@@ -1,29 +1,38 @@
 import Card from "../dto/Card"
 import Game from "../dto/Game"
+import CardValidatorInterface from "./CardValidatorInterface"
+import GameValidatorInterface from "./GameValidatorInterface"
 import ValidationRule from "../dto/ValidationRule"
-import ValidationType from "../dto/ValidationType"
-import ValidatorInterface from "./ValidatorInterface"
+import ValidationType from "../dto/CardValidationType"
 
 export default class Validator {
     constructor(
-        private readonly validators: Record<ValidationType, ValidatorInterface>
+        private readonly cardValidators: Record<ValidationType, CardValidatorInterface>,
+        private readonly gameValidators: GameValidatorInterface[],
     ) {}
 
     public validate(game: Game): void | never {
-        for (const card of game.cards) {
-            this.validateCard(card, game.validationRules)
-        }
+      this.validateGame(game)
+      for (const card of game.cards) {
+          this.validateCard(card, game.validationRules)
+      }
     }
 
     private validateCard(card: Card, rules: ValidationRule[]): void | never {
         for (const rule of rules) {
-            const validator: ValidatorInterface | undefined = this.validators[rule.type]
+          const validator: CardValidatorInterface | undefined = this.cardValidators[rule.type]
 
-            if (validator === undefined) {
-                throw new Error(`Missing validator for rule type ${rule.type}.`)
-            }
+          if (validator === undefined) {
+              throw new Error(`[Validator] Missing validator for rule type ${rule.type}.`)
+          }
 
-            validator.validate(card, rule)
-        }
+          validator.validate(card, rule)
+      }
+    }
+
+    private validateGame(game: Game): void | never {
+      for (const validator of this.gameValidators) {
+        validator.validate(game)
+      }
     }
 }
