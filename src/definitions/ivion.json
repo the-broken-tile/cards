@@ -56,6 +56,24 @@
     {"name": "edition", "type": "string", "enum": ["first", "second"], "required": true},
     {"name": "flavor", "type": "string"}
   ],
+  "entities": [
+    {
+      "name": "class",
+      "attributes": [
+        {"name": "colors", "type": "string[]", "enum": ["blue", "red", "grey", "green"]},
+        {"name": "realm", "type": "string", "enum": ["The Skels", "Calabria"]},
+        {"name": "edition", "type": "string", "enum": ["first", "second"]}
+      ],
+      "items": [
+        {
+          "name": "Knight",
+          "attributes": [
+            {"name": "colors", "value": ["grey"]}
+          ]
+        }
+      ]
+    }
+  ],
   "cards": [
     {
       "id": 1,

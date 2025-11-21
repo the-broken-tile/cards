@@ -16,11 +16,13 @@ import RequiredAttributesValidator from "./validation/RequiredAttributesValidato
 import ValidationRuleFactory from "./factory/validation/ValidationRuleFactory"
 import AttributeDefinitionEnumValidationFactory from "./factory/validation/AttributeDefinitionEnumValidationFactory"
 import ConflictsValidationRuleFactory from "./factory/validation/ConflictsValidationRuleFactory"
-import DummyValidator from "./validation/DummyValidator";
-import DuplicateIdValidator from "./validation/DuplicateIdValidator";
-import RequiredIfMissingValidationRuleFactory from "./factory/validation/RequiredIfMissingValidationRuleFactory";
-import AttributeRequiredIfAnotherMissingValidator from "./validation/AttributeRequiredIfAnotherMissingValidator";
-import UniqueAttributeNamesValidator from "./validation/UniqueAttributeNamesValidator";
+import DummyValidator from "./validation/DummyValidator"
+import DuplicateIdValidator from "./validation/DuplicateIdValidator"
+import RequiredIfMissingValidationRuleFactory from "./factory/validation/RequiredIfMissingValidationRuleFactory"
+import AttributeRequiredIfAnotherMissingValidator from "./validation/AttributeRequiredIfAnotherMissingValidator"
+import UniqueAttributeNamesValidator from "./validation/UniqueAttributeNamesValidator"
+import EntitiesFactory from "./factory/EntitiesFactory"
+import EntityFactory from "./factory/EntityFactory"
 
 const validationRuleFactory: ValidationRuleFactory = new ValidationRuleFactory([
   new AttributeDefinitionEnumValidationFactory(),
@@ -29,16 +31,15 @@ const validationRuleFactory: ValidationRuleFactory = new ValidationRuleFactory([
   new RequiredIfMissingValidationRuleFactory(),
 ])
 
-const cardFactory: CardFactory = new CardFactory(
-    new AttributeFactory({
-        "string": new StringAttributeFactory(),
-        "enum": new StringAttributeFactory(),
-        "string[]": new ArrayOfStringsAttributeFactory(),
-        "number": new NumberAttributeFactory(),
-        "number[]": new ArrayOfNumbersAttributeFactory(),
-        "boolean": new BooleanAttributeFactory(),
-    }),
-)
+const attributeFactory: AttributeFactory = new AttributeFactory({
+  "string": new StringAttributeFactory(),
+  "enum": new StringAttributeFactory(),
+  "string[]": new ArrayOfStringsAttributeFactory(),
+  "number": new NumberAttributeFactory(),
+  "number[]": new ArrayOfNumbersAttributeFactory(),
+  "boolean": new BooleanAttributeFactory(),
+})
+const cardFactory: CardFactory = new CardFactory(attributeFactory)
 
 const validator: Validator = new Validator({
     "enum": new EnumValidator(),
@@ -54,12 +55,14 @@ const validator: Validator = new Validator({
 )
 
 const attributeDefinitionFactory: AttributeDefinitionFactory = new AttributeDefinitionFactory()
+const entityFactory: EntitiesFactory = new EntitiesFactory(attributeDefinitionFactory, new EntityFactory(attributeFactory))
 
 const gameFactory: GameFactory = new GameFactory(
   cardFactory,
   validator,
   attributeDefinitionFactory,
   validationRuleFactory,
+  entityFactory,
   [
     { type: "uniqueIds" },
     { type: "uniqueAttributeNames" },

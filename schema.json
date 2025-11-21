@@ -5,15 +5,7 @@
     "attributes": {
       "type": "array",
       "items": {
-        "type": "object",
-        "properties": {
-          "name": { "type": "string" },
-          "type": { "type": "string" },
-          "enum": { "type": "array", "items": {"type": "string"} },
-          "conflicts": { "type": "string" },
-          "requiredIfMissing": { "type": "string" }
-        },
-        "required": ["name", "type"]
+        "$ref": "#/$defs/attribute"
       }
     },
     "cards": {
@@ -36,7 +28,41 @@
         },
         "required": ["id", "name", "attributes"]
       }
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/attribute"
+            }
+          },
+          "items": {
+            "type": "array",
+            "items": {
+
+            }
+          }
+        }
+      }
     }
   },
-  "required": ["name", "attributes", "cards"]
+  "required": ["name", "attributes", "cards"],
+  "$defs": {
+    "attribute": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "enum": { "type": "array",  "items": { "type": "string" } },
+        "conflicts": {"type": "string" },
+        "requiredIfMissing": {"type": "string" }
+      },
+      "required": ["name", "type"]
+    }
+  }
 }

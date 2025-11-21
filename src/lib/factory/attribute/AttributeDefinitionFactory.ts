@@ -1,4 +1,4 @@
-import AttributeDefinition from "../../dto/AttributeDefinition";
+import AttributeDefinition from "../../dto/AttributeDefinition"
 
 export default class AttributeDefinitionFactory {
     public build(payload: Record<string, any>): AttributeDefinition {
