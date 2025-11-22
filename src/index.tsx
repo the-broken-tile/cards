@@ -1,7 +1,8 @@
 import React from "react"
 import ReactDOM, { Root } from "react-dom/client"
 import "./index.css"
-import App from "./App"
+import JsonRendererApp from "./apps/JsonRendererApp"
+import { HashRouter, Routes, Route } from "react-router"
 import reportWebVitals from "./reportWebVitals"
 
 const root: Root = ReactDOM.createRoot(
@@ -10,7 +11,11 @@ const root: Root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <HashRouter>
+      <Routes>
+        <Route path="/json" element={<JsonRendererApp />} />
+      </Routes>
+    </HashRouter>
   </React.StrictMode>
 )
 

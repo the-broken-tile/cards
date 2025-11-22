@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
 
-import ivionJson from "./definitions/ivion.json"
-import Game from './lib/dto/Game'
-import { gameFactory } from './lib/container'
-import { IDCodec } from "./lib/encoding/id-codec"
+import ivionJson from "../definitions/ivion.json"
+import Game from '../lib/dto/Game'
+import { gameFactory } from '../lib/container'
+import { IDCodec } from "../lib/encoding/id-codec"
 
-const App = () => {
+const JsonRendererApp = () => {
   const [game, setGame] = useState<Game|null>(null)
   const [error, setError] = useState<string|null>(null)
 
@@ -46,4 +46,4 @@ const App = () => {
   )
 }
 
-export default App
+export default JsonRendererApp
