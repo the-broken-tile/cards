@@ -26,6 +26,7 @@ import EntityFactory from "./factory/EntityFactory"
 import EntityMapper from "./factory/EntityMapper"
 import EnumAttributeFactory from "./factory/attribute/EnumAttributeFactory"
 import EntityAttributeFactory from "./factory/attribute/EntityAttributeFactory"
+import GameRepository from "./GameRepository"
 
 const validationRuleFactory: ValidationRuleFactory = new ValidationRuleFactory([
   new AttributeDefinitionEnumValidationFactory(),
@@ -74,8 +75,11 @@ const gameFactory: GameFactory = new GameFactory(
   ]
 )
 
+const gameRepository: GameRepository = new GameRepository(gameFactory)
+
 export {
-    cardFactory,
-    gameFactory,
-    validator,
+  cardFactory,
+  gameFactory,
+  validator,
+  gameRepository
 }
