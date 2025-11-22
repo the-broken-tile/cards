@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState} from "react"
 import { useParams } from "react-router"
 
 import Game from '../../lib/dto/Game'
 import { gameRepository } from '../../lib/container'
-import { IDCodec } from "../../lib/encoding/id-codec"
 
 const Json = () => {
   const { name } = useParams()
@@ -22,17 +21,6 @@ const Json = () => {
     }
   }, [])
 
-  const quadripleIds = (): number[] => {
-    if (game === null) {
-      return []
-    }
-
-    return game.cards.map(card => card.id)
-      .reduce((carry: number[], id: number): number[] => {
-        return [...carry, id, id, id, id]
-      }, [])
-  }
-
   if (error !== null) {
     return <>Error: {error}</>
   }
@@ -41,14 +29,9 @@ const Json = () => {
     return <>"Loading"</>
   }
 
-  return (
-    <div className="app">
-      <div>Encoded all 4x ids: {IDCodec.encodeToString(quadripleIds())}</div>
-      <br />
-      <div>Decoded all 4x ids: {IDCodec.decodeFromString(IDCodec.encodeToString(quadripleIds())).join(", ")}</div>
-      <pre>{JSON.stringify(game,  null, "  ")}</pre>
-    </div>
-  )
+  return <pre className="app">
+    {JSON.stringify(game,  null, "  ")}
+  </pre>
 }
 
 export default Json
