@@ -7,8 +7,8 @@ import AttributeDefinition from "../dto/AttributeDefinition"
 import ValidationRuleFactory from "./validation/ValidationRuleFactory"
 import ValidationRule from "../dto/ValidationRule"
 import EntitiesFactory from "./EntitiesFactory"
-import Entity from "../dto/Entity"
 import EntityMapper from "./EntityMapper"
+import Entity from "../dto/Entity"
 
 export default class GameFactory {
   constructor(

@@ -1,7 +1,7 @@
 import Attribute from "./Attribute"
 import Card from "./Card"
 import ValidationRule from "./ValidationRule"
-import Entity from "./Entity";
+import Entity from "./Entity"
 
 declare type Game = {
   name: string

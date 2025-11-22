@@ -1,17 +1,17 @@
-import Entity from "../dto/Entity"
 import AttributeDefinition from "../dto/AttributeDefinition"
 import Attribute from "../dto/Attribute"
 import AttributeFactory from "./attribute/AttributeFactory"
+import Entity from "../dto/Entity"
 
 export default class EntityFactory {
   constructor(private readonly attributeFactory: AttributeFactory) {
   }
 
   public build(type: string, payload: Record<string, any>, attributeDefinitions: AttributeDefinition[]): Entity {
-    return {
+    return new Entity(
       type,
-      name: payload.name,
-      attributes: payload.attributes.map((attribute: Record<string, any>): Attribute => {
+      payload.name,
+      payload.attributes.map((attribute: Record<string, any>): Attribute => {
         const attributeDefinition: AttributeDefinition | undefined = attributeDefinitions.find((def: AttributeDefinition): boolean => {
           return def.name === attribute.name
         })
@@ -22,6 +22,6 @@ export default class EntityFactory {
 
         return this.attributeFactory.build(attribute, attributeDefinition)
       })
-    }
+    )
   }
 }

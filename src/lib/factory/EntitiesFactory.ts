@@ -1,7 +1,7 @@
-import Entity from "../dto/Entity"
 import AttributeDefinition from "../dto/AttributeDefinition"
 import AttributeDefinitionFactory from "./attribute/AttributeDefinitionFactory"
 import EntityFactory from "./EntityFactory"
+import Entity from "../dto/Entity"
 
 export default class EntitiesFactory {
   constructor(

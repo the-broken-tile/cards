@@ -1,7 +1,7 @@
 import Game from "../dto/Game"
 import Card from "../dto/Card"
-import Entity from "../dto/Entity"
 import Attribute from "../dto/Attribute"
+import Entity from "../dto/Entity"
 
 type Writeable<T> = { -readonly [P in keyof T]: T[P] }
 
