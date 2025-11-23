@@ -1,24 +1,27 @@
 import React, {useEffect, useState} from "react"
 import { useParams } from "react-router"
 
-import Game from '../../lib/dto/Game'
 import { gameRepository } from '../../lib/container'
+import GameInterface from "../../lib/dto/GameInterface"
 
-const Json = () => {
+export default function Json() {
   const { name } = useParams()
-  const [game, setGame] = useState<Game|null>(null)
+  const [game, setGame] = useState<GameInterface|null>(null)
   const [error, setError] = useState<string|null>(null)
 
-  useEffect((): void => {
+  const fetchGame = async(): Promise<void> => {
     try {
       if (name === undefined) {
         setError("name is required")
       } else {
-        setGame(gameRepository.get(name))
+        setGame(await gameRepository.get(name))
       }
     } catch (e) {
       setError((e as Error).message)
     }
+  }
+  useEffect((): void => {
+    fetchGame()
   }, [])
 
   if (error !== null) {
@@ -33,5 +36,3 @@ const Json = () => {
     {JSON.stringify(game,  null, "  ")}
   </pre>
 }
-
-export default Json
