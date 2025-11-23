@@ -20,6 +20,6 @@ export default function Index() {
   }
 
   return <ul>
-    {gameList.map((name: string, i: number) => <li key={i}><Link to={`/${name}.json`}>{name}</Link></li>)}
+    {gameList.map((name: string, i: number) => <li key={i}><Link to={`/${name.toLowerCase()}`}>{name}</Link></li>)}
   </ul>
 }

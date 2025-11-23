@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react"
-import { useParams } from "react-router"
+import {Link, useParams} from "react-router"
 
 import { gameRepository } from '../../lib/container'
 import GameInterface from "../../lib/dto/GameInterface"
 
 import Loading from "../components/Loading"
+const EXAMPLE_DECK: string = "DwgAAIAACAAAgAAIAACAAAgAAIAACAAAgAAIAACAAAgAAIAACAAAgAAIAACAAAgAAIAA"
 
-export default function Json() {
+export default function Game() {
   const { name } = useParams()
   const [game, setGame] = useState<GameInterface|null>(null)
   const [error, setError] = useState<string|null>(null)
@@ -34,7 +35,15 @@ export default function Json() {
     return <Loading />
   }
 
-  return <pre className="app">
-    {JSON.stringify(game,  null, "  ")}
-  </pre>
+  return <>
+    <nav>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to={`/${game.name.toLowerCase()}/deck/${EXAMPLE_DECK}`}>Example deck</Link></li>
+      </ul>
+    </nav>
+    <pre className="app">
+      {JSON.stringify(game,  null, "  ")}
+    </pre>
+    </>
 }
