@@ -2,7 +2,7 @@ import AttributeFactoryInterface from "./AttributeFactoryInterface"
 import Attribute from "../../dto/Attribute"
 
 export default class EntityAttributeFactory implements AttributeFactoryInterface {
-  public build(name: string, payload: Record<string, any>): Attribute {
+  public build(payload: Record<string, any>, name: string): Attribute {
     return {
       name,
       type: "entity",

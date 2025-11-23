@@ -27,6 +27,8 @@ import EntityMapper from "./factory/EntityMapper"
 import EnumAttributeFactory from "./factory/attribute/EnumAttributeFactory"
 import EntityAttributeFactory from "./factory/attribute/EntityAttributeFactory"
 import GameRepository from "./GameRepository"
+import NormalizedCardFactory from "./factory/NormalizedCardFactory"
+import CardFactoryManager from "./factory/CardFactoryManager"
 
 const validationRuleFactory: ValidationRuleFactory = new ValidationRuleFactory([
   new AttributeDefinitionEnumValidationFactory(),
@@ -44,8 +46,12 @@ const attributeFactory: AttributeFactory = new AttributeFactory({
   "number[]": new ArrayOfNumbersAttributeFactory(),
   "boolean": new BooleanAttributeFactory(),
 })
-const cardFactory: CardFactory = new CardFactory(attributeFactory)
 
+const cardFactory: CardFactory = new CardFactory(attributeFactory)
+const cardFactoryManager: CardFactoryManager = new CardFactoryManager([
+  cardFactory,
+  new NormalizedCardFactory(attributeFactory),
+])
 const validator: Validator = new Validator({
     "enum": new EnumValidator(),
     "dependency": new DependencyValidator(),
@@ -63,7 +69,7 @@ const attributeDefinitionFactory: AttributeDefinitionFactory = new AttributeDefi
 const entityFactory: EntitiesFactory = new EntitiesFactory(attributeDefinitionFactory, new EntityFactory(attributeFactory))
 
 const gameFactory: GameFactory = new GameFactory(
-  cardFactory,
+  cardFactoryManager,
   validator,
   attributeDefinitionFactory,
   validationRuleFactory,

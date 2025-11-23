@@ -20,6 +20,6 @@ export default class AttributeFactory {
             throw new Error(`[AttributeFactory] Missing factory for attribute type "${attributeDefinition.type}".`)
         }
         
-        return factory.build(name, payload)
+        return factory.build(payload, name)
     }
 }

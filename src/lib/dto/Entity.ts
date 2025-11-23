@@ -1,9 +1,10 @@
 import Attribute from "./Attribute"
+import EntityInterface from "./EntityInterface"
 
-export default class Entity {
+export default class Entity implements EntityInterface {
   private readonly ref: string
   constructor(
-    public readonly type: string,
+    private readonly type: string,
     public readonly name: string,
     public readonly attributes: Attribute[],
   ) {
@@ -13,9 +14,13 @@ export default class Entity {
   public toJSON(): Record<string, any>|string {
     return {
       ref: this.ref,
-      type: this.type,
+      id: this.id,
       name: this.name,
       attributes: this.attributes,
     }
+  }
+
+  get id(): string {
+    return this.type
   }
 }

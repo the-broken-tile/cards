@@ -1,7 +1,6 @@
 import Card from "../dto/Card"
 import Game from "../dto/Game"
 import Validator from "../validation/Validator"
-import CardFactory from "./CardFactory"
 import AttributeDefinitionFactory from "./attribute/AttributeDefinitionFactory"
 import AttributeDefinition from "../dto/AttributeDefinition"
 import ValidationRuleFactory from "./validation/ValidationRuleFactory"
@@ -9,10 +8,11 @@ import ValidationRule from "../dto/ValidationRule"
 import EntitiesFactory from "./EntitiesFactory"
 import EntityMapper from "./EntityMapper"
 import Entity from "../dto/Entity"
+import CardFactoryInterface from "./CardFactoryInterface"
 
 export default class GameFactory {
   constructor(
-    private readonly cardFactory: CardFactory,
+    private readonly cardFactory: CardFactoryInterface,
     private readonly validator: Validator,
     private readonly attributeDefinitionFactory: AttributeDefinitionFactory,
     private readonly validationRuleFactory: ValidationRuleFactory,

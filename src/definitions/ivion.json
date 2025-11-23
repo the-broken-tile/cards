@@ -54,7 +54,8 @@
     {"name": "isInstant", "type": "boolean"},
     {"name": "isUltimate", "type": "boolean"},
     {"name": "edition", "type": "string", "enum": ["first", "second"], "required": true},
-    {"name": "flavor", "type": "string"}
+    {"name": "flavor", "type": "string"},
+    {"name": "artist", "type": "string"}
   ],
   "entities": [
     {
@@ -78,19 +79,15 @@
     {
       "id": 1,
       "name": "Chastise",
-      "attributes": [
-        {"name": "type", "value": "ability"},
-        {"name": "class", "value": "Knight"},
-        {"name": "action", "value": -1},
-        {"name": "range", "value": 2},
-        {"name": "power", "value": 1},
-        {"name": "control", "value": ["disarm"]},
-        {"name": "effect", "value": "Silence 3 [silence] target uncontrolled opponent."},
-        {"name": "isInstant", "value": false},
-        {"name": "isUltimate", "value": false},
-        {"name": "edition", "value": "second"},
-        {"name": "flavor", "value": "It is not their place to stand against Her.\nTeach them this,@todo"}
-      ]
+      "type": ["ability"],
+      "class": "Knight",
+      "action": -1,
+      "range": 2,
+      "power": 1,
+      "control": ["disarm"],
+      "effect": "Silence 3 [silence] target uncontrolled opponent.",
+      "edition": "second",
+      "flavor": "It is not their place to stand against Her.\nTeach them this,@todo"
     },
     {
       "id": 2,

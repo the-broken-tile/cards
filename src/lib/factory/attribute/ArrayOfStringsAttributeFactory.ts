@@ -2,7 +2,7 @@ import Attribute from "../../dto/Attribute";
 import AttributeFactoryInterface from "./AttributeFactoryInterface";
 
 export default class ArrayOfStringsAttributeFactory implements AttributeFactoryInterface {
-    public build(name: string, payload: Record<string, any>): Attribute {
+    public build(payload: Record<string, any>, name: string): Attribute {
         if (!Array.isArray(payload.value)) {
             throw new Error(`[ArrayOfStringsAttributeFactory] Invalid attribute value for attribute "${name}": "${payload.value}".`)
         }

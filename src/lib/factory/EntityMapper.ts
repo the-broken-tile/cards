@@ -27,7 +27,7 @@ export default class EntityMapper {
         return
     }
 
-    const entity: Entity | undefined = entities.find((entity: Entity): boolean =>  attribute.value === entity.name && attribute.name === entity.type)
+    const entity: Entity | undefined = entities.find((entity: Entity): boolean =>  attribute.value === entity.name && attribute.name === entity.id)
 
     if (entity !== undefined) {
       attribute.value = entity
