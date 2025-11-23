@@ -10,7 +10,7 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/:name.json" element={<Json />} />
+        <Route path="/:name" element={<Json />} />
         <Route path="/:name/:encoded" element={<CardList/>} />
       </Routes>
     </HashRouter>
