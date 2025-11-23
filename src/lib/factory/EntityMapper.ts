@@ -1,7 +1,7 @@
 import Game from "../dto/Game"
-import Card from "../dto/Card"
 import Attribute from "../dto/Attribute"
 import Entity from "../dto/Entity"
+import CardInterface from "../dto/CardInterface"
 
 type Writeable<T> = { -readonly [P in keyof T]: T[P] }
 
@@ -12,7 +12,7 @@ export default class EntityMapper {
     }
   }
 
-  private mapCard(card: Card, entities: Entity[]): void {
+  private mapCard(card: CardInterface, entities: Entity[]): void {
     for (const attribute of card.attributes) {
       this.mapAttribute(attribute, entities)
     }

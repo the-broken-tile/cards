@@ -1,7 +1,6 @@
-import CardFactoryInterface from "./CardFactoryInterface";
-import AttributeDefinition from "../dto/AttributeDefinition";
-import Card from "../dto/Card";
-import card from "../dto/Card";
+import CardFactoryInterface from "./CardFactoryInterface"
+import AttributeDefinition from "../dto/AttributeDefinition"
+import CardInterface from "../dto/CardInterface"
 
 export default class CardFactoryManager implements CardFactoryInterface {
   constructor(private readonly cardFactories: CardFactoryInterface[]) {
@@ -10,7 +9,7 @@ export default class CardFactoryManager implements CardFactoryInterface {
     return true
   }
 
-  public build(payload: Record<string, any>, attributeDefinitions: AttributeDefinition[]): Card {
+  public build(payload: Record<string, any>, attributeDefinitions: AttributeDefinition[]): CardInterface {
     for (const cardFactory of this.cardFactories) {
       if (cardFactory.supports(payload)) {
         return cardFactory.build(payload, attributeDefinitions)

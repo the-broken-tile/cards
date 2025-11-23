@@ -1,10 +1,10 @@
 import Attribute from "../dto/Attribute"
-import Card from "../dto/Card"
 import ValidationRule from "../dto/ValidationRule"
 import CardValidatorInterface from "./CardValidatorInterface"
+import CardInterface from "../dto/CardInterface"
 
 export default class RequiredAttributesValidator implements CardValidatorInterface {
-    public validate(card: Card, rule: ValidationRule): void | never {
+    public validate(card: CardInterface, rule: ValidationRule): void | never {
         if (rule.type !== "requiredAttributes") {
             throw new Error(`[RequiredAttributesValidator] Miss-configured validation rule of type "${rule.type}".`)
         }

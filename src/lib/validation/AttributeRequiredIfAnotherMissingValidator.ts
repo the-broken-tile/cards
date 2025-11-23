@@ -1,10 +1,10 @@
 import CardValidatorInterface from "./CardValidatorInterface"
-import Card from "../dto/Card"
 import ValidationRule from "../dto/ValidationRule"
 import Attribute from "../dto/Attribute";
+import CardInterface from "../dto/CardInterface"
 
 export default class AttributeRequiredIfAnotherMissingValidator implements CardValidatorInterface {
-  validate(card: Card, rule: ValidationRule): void | never {
+  validate(card: CardInterface, rule: ValidationRule): void | never {
     if (rule.type !== "requiredIfMissing") {
       throw new Error(`[AttributeRequiredIfAnotherMissingValidator] Miss-configured validation rule of type ${rule.type}.`)
     }

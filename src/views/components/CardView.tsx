@@ -1,7 +1,7 @@
-import Card from "../../lib/dto/Card"
+import CardInterface from "../../lib/dto/CardInterface"
 
 type Props = {
-  card: Card
+  card: CardInterface
 }
 
 export default function CardView(props: Props) {

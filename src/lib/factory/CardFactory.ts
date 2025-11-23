@@ -3,7 +3,7 @@ import AttributeDefinition from "../dto/AttributeDefinition"
 import Card from "../dto/Card"
 
 import AttributeFactory from "./attribute/AttributeFactory"
-import CardFactoryInterface from "./CardFactoryInterface";
+import CardFactoryInterface from "./CardFactoryInterface"
 
 export default class CardFactory implements CardFactoryInterface {
   constructor(private readonly attributeFactory: AttributeFactory)
@@ -26,10 +26,10 @@ export default class CardFactory implements CardFactoryInterface {
       throw new Error(`[CardFactory] Attributes are not an array in card "${payload.name}".`)
     }
 
-    return {
-      id: payload.id,
-      name: payload.name,
-      attributes: payload.attributes.map((attribute: Record<string, any>): Attribute => {
+    return new Card(
+      payload.id,
+      payload.name,
+      payload.attributes.map((attribute: Record<string, any>): Attribute => {
         if (typeof attribute.type === "string") {
           throw new Error(`[CardFactory] Attribute type for "${payload.name}.${attribute.name}" must be empty.`)
         }
@@ -42,7 +42,7 @@ export default class CardFactory implements CardFactoryInterface {
         }
 
         return this.attributeFactory.build(attribute, attributeDefinition)
-      })
-    }
+      }),
+    )
   }
 }

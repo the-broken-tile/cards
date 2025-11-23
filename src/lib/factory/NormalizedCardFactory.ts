@@ -2,9 +2,7 @@ import AttributeDefinition from "../dto/AttributeDefinition"
 import Card from "../dto/Card"
 import CardFactoryInterface from "./CardFactoryInterface"
 import Attribute from "../dto/Attribute"
-import AttributeFactoryInterface from "./attribute/AttributeFactoryInterface"
 import AttributeFactory from "./attribute/AttributeFactory"
-import attribute from "../dto/Attribute";
 
 export default class NormalizedCardFactory implements CardFactoryInterface {
   constructor(private readonly attributeFactory: AttributeFactory) {
@@ -17,18 +15,11 @@ export default class NormalizedCardFactory implements CardFactoryInterface {
     const { id, name, ...attributes } = payload
     console.log(attributes)
 
-    return {
+    return new Card(
       id,
       name,
-      attributes: this.buildAttributes(name, attributes as Record<string, any>[], attributeDefinitions),
-      // attributes: payload.attributes.map((attribute: Record<string, any>): Attribute => {
-
-      //
-
-      //
-      //   return this.attributeFactory.build(attribute, attributeDefinition)
-      // })
-    }
+      this.buildAttributes(name, attributes as Record<string, any>[], attributeDefinitions),
+    )
   }
 
   private buildAttributes(cardName: string, attributes: Record<string, any>[], attributeDefinitions: AttributeDefinition[]): Attribute[]

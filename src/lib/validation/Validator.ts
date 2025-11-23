@@ -1,9 +1,9 @@
-import Card from "../dto/Card"
 import Game from "../dto/Game"
 import CardValidatorInterface from "./CardValidatorInterface"
 import GameValidatorInterface from "./GameValidatorInterface"
 import ValidationRule from "../dto/ValidationRule"
 import ValidationType from "../dto/CardValidationType"
+import CardInterface from "../dto/CardInterface"
 
 export default class Validator {
     constructor(
@@ -18,7 +18,7 @@ export default class Validator {
       }
     }
 
-    private validateCard(card: Card, rules: ValidationRule[]): void | never {
+    private validateCard(card: CardInterface, rules: ValidationRule[]): void | never {
         for (const rule of rules) {
           const validator: CardValidatorInterface | undefined = this.cardValidators[rule.type]
 

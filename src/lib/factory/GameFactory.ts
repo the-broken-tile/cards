@@ -1,13 +1,13 @@
-import Card from "../dto/Card"
 import Game from "../dto/Game"
-import Validator from "../validation/Validator"
-import AttributeDefinitionFactory from "./attribute/AttributeDefinitionFactory"
+import CardInterface from "../dto/CardInterface"
 import AttributeDefinition from "../dto/AttributeDefinition"
-import ValidationRuleFactory from "./validation/ValidationRuleFactory"
+import Entity from "../dto/Entity"
 import ValidationRule from "../dto/ValidationRule"
+import Validator from "../validation/Validator"
+import ValidationRuleFactory from "./validation/ValidationRuleFactory"
+import AttributeDefinitionFactory from "./attribute/AttributeDefinitionFactory"
 import EntitiesFactory from "./EntitiesFactory"
 import EntityMapper from "./EntityMapper"
-import Entity from "../dto/Entity"
 import CardFactoryInterface from "./CardFactoryInterface"
 
 export default class GameFactory {
@@ -42,7 +42,7 @@ export default class GameFactory {
     const game: Game = new Game(
       payload.name,
       payload.attributes, // @todo maybe use factory
-      payload.cards.map((card: Record<string, any>): Card => this.cardFactory.build(card, attributeDefinitions)),
+      payload.cards.map((card: Record<string, any>): CardInterface => this.cardFactory.build(card, attributeDefinitions)),
       this.validationRules(payload.attributes),
       entities.flat(),
   )

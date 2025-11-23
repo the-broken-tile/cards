@@ -1,9 +1,9 @@
 import CardValidatorInterface from "./CardValidatorInterface"
-import Card from "../dto/Card";
-import ValidationRule from "../dto/ValidationRule";
+import ValidationRule from "../dto/ValidationRule"
+import CardInterface from "../dto/CardInterface"
 
 export default class UniqueAttributeNamesValidator implements CardValidatorInterface {
-  public validate(card: Card, rule: ValidationRule): void | never {
+  public validate(card: CardInterface, rule: ValidationRule): void | never {
     if (rule.type !== "uniqueAttributeNames") {
       throw new Error(`[UniqueAttributeNamesValidator] Miss-configured validation rule of type "${rule.type}".`)
     }

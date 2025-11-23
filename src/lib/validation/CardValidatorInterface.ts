@@ -1,6 +1,6 @@
-import Card from "../dto/Card"
 import ValidationRule from "../dto/ValidationRule"
+import CardInterface from "../dto/CardInterface"
 
 export default interface CardValidatorInterface {
-    validate(card: Card, rule: ValidationRule): void | never
+    validate(card: CardInterface, rule: ValidationRule): void | never
 }
