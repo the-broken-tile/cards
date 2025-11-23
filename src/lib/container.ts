@@ -29,12 +29,18 @@ import EntityAttributeFactory from "./factory/attribute/EntityAttributeFactory"
 import GameRepository from "./GameRepository"
 import NormalizedCardFactory from "./factory/NormalizedCardFactory"
 import CardFactoryManager from "./factory/CardFactoryManager"
+import MinValueValidationRuleFactory from "./factory/validation/MinValueValidationRuleFactory"
+import MaxValueValidationRuleFactory from "./factory/validation/MaxValueValidationRuleFactory";
+import MinValueValidator from "./validation/MinValueValidator";
+import MaxValueValidator from "./validation/MaxValueValidator";
 
 const validationRuleFactory: ValidationRuleFactory = new ValidationRuleFactory([
   new AttributeDefinitionEnumValidationFactory(),
   new AttributeDefinitionRequiredValidationRuleFactory(),
   new ConflictsValidationRuleFactory(),
   new RequiredIfMissingValidationRuleFactory(),
+  new MinValueValidationRuleFactory(),
+  new MaxValueValidationRuleFactory(),
 ])
 
 const attributeFactory: AttributeFactory = new AttributeFactory({
@@ -58,6 +64,8 @@ const validator: Validator = new Validator({
     "requiredAttributes": new RequiredAttributesValidator(),
     "requiredIfMissing": new AttributeRequiredIfAnotherMissingValidator(),
     "uniqueAttributeNames": new UniqueAttributeNamesValidator(),
+    "min": new MinValueValidator(),
+    "max": new MaxValueValidator(),
     "uniqueIds": new DummyValidator(), // @todo change this
   },
   [

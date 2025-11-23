@@ -37,11 +37,25 @@ export type RequiredAttributesRule = BaseValidationRule & {
     readonly attributes: string[]
 }
 
+export type MinValidationRule = BaseValidationRule & {
+  readonly type: "min"
+  readonly attribute: string
+  readonly minValue: number
+}
+
+export type MaxValidationRule = BaseValidationRule & {
+  readonly type: "max"
+  readonly attribute: string
+  readonly maxValue: number
+}
+
 type ValidationRule = DependentValidationRule
   | EnumValidationRule
   | RequiredAttributesRule
   | UniqueIdsValidationRule
   | RequiredIfMissingValidationRule
   | UniqueAttributeNamesValidationRule
+  | MinValidationRule
+  | MaxValidationRule
 
 export default ValidationRule

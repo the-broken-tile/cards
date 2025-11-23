@@ -4,5 +4,7 @@ type ValidationType = "dependency"
   | "uniqueIds"
   | "requiredIfMissing"
   | "uniqueAttributeNames"
+  | "min"
+  | "max"
 
 export default ValidationType

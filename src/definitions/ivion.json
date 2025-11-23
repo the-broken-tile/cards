@@ -46,9 +46,9 @@
       "conflicts": "class",
       "requiredIfMissing": "class"
     },
-    {"name": "action", "type": "number", "required": true},
-    {"name": "range", "type": "number"},
-    {"name": "power", "type": "number", "required": true},
+    {"name": "action", "type": "number", "required": true, "min": -2, "max": 1},
+    {"name": "power", "type": "number", "required": true, "min": -5, "max": 4},
+    {"name": "range", "type": "number", "min": 0, "max": 3},
     {"name": "control", "type": "string[]", "enum": ["slow", "silence", "disarm"]},
     {"name": "effect", "type": "string", "required":  true},
     {"name": "instant", "type": "boolean"},
