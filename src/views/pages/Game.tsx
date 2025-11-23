@@ -1,5 +1,6 @@
 import React, { JSX, useEffect, useState } from "react"
-import {Link, useParams} from "react-router"
+import { Link, useParams} from "react-router"
+import { List, ListItem } from "@mui/material"
 
 import { gameRepository } from '../../lib/container'
 import GameInterface from "../../lib/dto/GameInterface"
@@ -37,10 +38,10 @@ export default function Game(): JSX.Element {
 
   return <>
     <nav>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to={`/${game.slug}/deck/${EXAMPLE_DECK}`}>Example deck</Link></li>
-      </ul>
+      <List>
+        <ListItem><Link to="/">Home</Link></ListItem>
+        <ListItem><Link to={`/${game.slug}/deck/${EXAMPLE_DECK}`}>Example deck</Link></ListItem>
+      </List>
     </nav>
     <pre className="app">
       {JSON.stringify(game,  null, "  ")}

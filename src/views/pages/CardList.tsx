@@ -1,5 +1,6 @@
 import React, { JSX, useEffect, useState } from "react"
 import { useParams } from "react-router"
+import { List, ListItem } from "@mui/material"
 
 import {gameRepository} from "../../lib/container"
 import CardInterface from "../../lib/dto/CardInterface"
@@ -39,10 +40,10 @@ export default function CardList(): JSX.Element {
     return <>{error}</>
   }
 
-  return <ul>
-    {ids.map((id: number, i: number) => <li key={i}>
+  return <List>
+    {ids.map((id: number, i: number) => <ListItem key={i}>
       <CardView card={game.cards.find((c: CardInterface): boolean => c.id === id)!} />
-    </li>
+    </ListItem>
     )}
-  </ul>
+  </List>
 }

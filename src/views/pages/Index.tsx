@@ -1,6 +1,7 @@
 import {useState, useEffect, JSX} from "react"
+import { List, ListItem } from "@mui/material"
 
-import { gameRepository } from '../../lib/container'
+import { gameRepository } from "../../lib/container"
 import Loading from "../components/Loading"
 import GameLink from "../components/GameLink"
 
@@ -19,7 +20,7 @@ export default function Index(): JSX.Element {
     return <Loading />
   }
 
-  return <ul>
-    {gameList.map(([slug, name]: [string, string], i: number) => <li key={i}><GameLink name={name} slug={slug} /></li>)}
-  </ul>
+  return <List>
+    {gameList.map(([slug, name]: [string, string], i: number) => <ListItem key={i}><GameLink name={name} slug={slug} /></ListItem>)}
+  </List>
 }
