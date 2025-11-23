@@ -11,7 +11,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/:name" element={<Json />} />
-        <Route path="/:name/:encoded" element={<CardList/>} />
+        <Route path="/:name/deck/:encoded" element={<CardList/>} />
       </Routes>
     </HashRouter>
   </StrictMode>
