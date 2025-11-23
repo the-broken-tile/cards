@@ -2,13 +2,19 @@ import Attribute from "./Attribute"
 import Card from "./Card"
 import ValidationRule from "./ValidationRule"
 import Entity from "./Entity"
+import GameInterface from "./GameInterface"
 
-declare type Game = {
-  name: string
-  cards: Card[]
-  attributes: Attribute[]
-  validationRules: ValidationRule[]
-  entities: Entity[]
+export default class Game implements GameInterface {
+  constructor(
+    public readonly name: string,
+    public readonly attributes: Attribute[],
+    public readonly cards: Card[],
+    public readonly validationRules: ValidationRule[],
+    public readonly entities: Entity[],
+  ) {
+  }
+
+  public toJSON(): Record<string, any>[] {
+    return this.cards
+  }
 }
-
-export default Game

@@ -3,7 +3,7 @@ import GameValidatorInterface from "./GameValidatorInterface"
 import ValidationRule from "../dto/ValidationRule"
 
 export default class DuplicateIdValidator implements GameValidatorInterface {
-  public  validate(game: Game): void {
+  public validate(game: Game): void {
     if (!game.validationRules.find((r: ValidationRule): boolean => r.type === "uniqueIds")) {
       return
     }

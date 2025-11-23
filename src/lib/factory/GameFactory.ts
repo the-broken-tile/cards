@@ -39,13 +39,13 @@ export default class GameFactory {
 
     const entities: Entity[][] = payload.entities.map((entity: Record<string, any>): Entity[] => this.entitiesFactory.build(entity))
 
-    const game: Game = {
-      name: payload.name,
-      attributes: payload.attributes, // @todo maybe use factory
-      cards: payload.cards.map((card: Record<string, any>): Card => this.cardFactory.build(card, attributeDefinitions)),
-      validationRules: this.validationRules(payload.attributes),
-      entities: entities.flat(),
-    }
+    const game: Game = new Game(
+      payload.name,
+      payload.attributes, // @todo maybe use factory
+      payload.cards.map((card: Record<string, any>): Card => this.cardFactory.build(card, attributeDefinitions)),
+      this.validationRules(payload.attributes),
+      entities.flat(),
+  )
 
     this.validator.validate(game)
     this.entityMapper.map(game)
