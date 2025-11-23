@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router"
 
 import { gameRepository } from '../../lib/container'
+import Loading from "../components/Loading"
 
 export default function Index() {
   const [gameList, setGameList] = useState<string[]|null>(null)
@@ -15,7 +16,7 @@ export default function Index() {
   }, [gameList])
 
   if (gameList === null) {
-    return <>Loading</>
+    return <Loading />
   }
 
   return <ul>

@@ -7,6 +7,7 @@ import {IDCodec} from "../../lib/encoding/id-codec"
 import GameInterface from "../../lib/dto/GameInterface"
 
 import CardView from "../components/CardView"
+import Loading from "../components/Loading"
 
 export default function CardList() {
   const { name, encoded } = useParams()
@@ -31,7 +32,7 @@ export default function CardList() {
   })
 
   if (game === null) {
-    return <>Loading</>
+    return <Loading />
   }
 
   if (error) {

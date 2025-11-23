@@ -4,6 +4,8 @@ import { useParams } from "react-router"
 import { gameRepository } from '../../lib/container'
 import GameInterface from "../../lib/dto/GameInterface"
 
+import Loading from "../components/Loading"
+
 export default function Json() {
   const { name } = useParams()
   const [game, setGame] = useState<GameInterface|null>(null)
@@ -29,7 +31,7 @@ export default function Json() {
   }
 
   if (game === null) {
-    return <>"Loading"</>
+    return <Loading />
   }
 
   return <pre className="app">
