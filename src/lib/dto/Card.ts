@@ -1,11 +1,11 @@
 import Attribute from "./Attribute"
-import Set from "./Set"
+import CardInterface from "./CardInterface"
 
-declare type Card = {
-    readonly id: number
-    readonly name: string
-    readonly attributes: Attribute[]
-    readonly set?: Set
+export default class Card implements CardInterface {
+  constructor(
+    public readonly id: number,
+    public readonly name: string,
+    public readonly attributes: Attribute[],
+  ) {
+  }
 }
-
-export default Card

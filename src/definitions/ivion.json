@@ -1,112 +1,1168 @@
 {
-    "name": "Ivion",
-    "attributes": [
+  "name": "Ivion",
+  "attributes": [
+    {
+      "name": "type",
+      "type": "string[]",
+      "enum": ["ability", "attack", "passive", "debuff", "aura", "instant", "buff", "travel"],
+      "required": true
+    },
+    {
+      "name": "class",
+      "type": "entity",
+      "enum": ["Knight", "Cryomancer", "Druid", "Sorcerer", "Warrior", "Wizard"],
+      "conflicts": "specification",
+      "requiredIfMissing": "specification"
+    },
+    {
+      "name": "specification",
+      "type": "string",
+      "enum": [
+        "Ancient",
+        "Archmage",
+        "Avatar",
+        "Baron",
+        "Curseblade",
+        "Ebon Mage",
+        "Enchantress",
+        "Errant",
+        "Executioner",
+        "Fletcher",
+        "Friar",
+        "Huntsman",
+        "Illusionist",
+        "Incarnate",
+        "Invoker",
+        "Jarl",
+        "Poacher",
+        "Ruffian",
+        "Saint",
+        "Steward",
+        "Survivalist",
+        "Watcher",
+        "Wilder",
+        "Winterborn"
+      ],
+      "conflicts": "class",
+      "requiredIfMissing": "class"
+    },
+    {"name": "action", "type": "number", "required": true, "min": -2, "max": 1},
+    {"name": "power", "type": "number", "required": true, "min": -5, "max": 4},
+    {"name": "range", "type": "number", "min": 0, "max": 3},
+    {"name": "control", "type": "string[]", "enum": ["slow", "silence", "disarm"]},
+    {"name": "effect", "type": "text", "required":  true},
+    {"name": "instant", "type": "boolean"},
+    {"name": "ultimate", "type": "boolean"},
+    {"name": "heroic", "type": "boolean"},
+    {"name": "edition", "type": "string", "enum": ["first", "second"], "required": true},
+    {"name": "flavor", "type": "text"},
+    {"name": "artist", "type": "string"}
+  ],
+  "entities": [
+    {
+      "name": "class",
+      "attributes": [
+        {"name": "colors", "type": "string[]", "enum": ["blue", "red", "grey", "green"]},
+        {"name": "realm", "type": "string", "enum": ["The Skels", "Calabria"]},
+        {"name": "edition", "type": "string", "enum": ["first", "second"]}
+      ],
+      "items": [
         {
-            "name": "type",
-            "type": "string",
-            "enum": ["ability", "attack", "passive", "debuff", "aura", "instant", "buff", "travel"],
-            "required": true
-        }, {
-            "name": "class",
-            "type": "string",
-            "enum": ["knight", "cryomancer", "druid", "sorcerer", "warrior", "wizard"]
-        }, {
-            "name": "specification",
-            "type": "string",
-            "enum": ["Ancient"],
-            "conflicts": "class"
-        }, {
-            "name": "action",
-            "type": "number",
-            "required": true
-        }, {
-            "name": "range",
-            "type": "number"
-        }, {
-            "name": "power",
-            "type": "number",
-            "required": true
-        }, {
-            "name": "control",
-            "type": "string[]",
-            "enum": ["slow", "silence", "disarm"]
-        }, {
-            "name": "effect",
-            "type": "string"
-        }, {
-            "name": "flavor",
-            "type": "string"
-        }, {
-            "name": "isInstant",
-            "type": "boolean"
-        }, {
-            "name": "isUltimate",
-            "type": "boolean"
-        }, {
-            "name": "edition",
-            "type": "string",
-            "enum": ["first", "second"]
-        }
-    ],
-    "cards": [
-        {
-            "id": 1,
-            "name": "Chastise",
-            "attributes": [
-                {
-                    "name": "type",
-                    "value": "ability"
-                }, {
-                    "name": "class",
-                    "value": "knight"
-                }, {
-                    "name": "action",
-                    "value": -1
-                }, {
-                    "name": "range",
-                    "value": 2
-                }, {
-                    "name": "power",
-                    "value": 1
-                }, {
-                    "name": "control",
-                    "value": ["disarm"]
-                }, {
-                    "name": "effect",
-                    "value": "Silence 3 [silence] target uncontrolled opponent."
-                }, {
-                    "name": "flavor",
-                    "value": "It is not their place to stand against Her.\nTeach them this,"
-                }, {
-                    "name": "isInstant",
-                    "value": false
-                }, {
-                    "name": "isUltimate",
-                    "value": false
-                }, {
-                    "name": "edition",
-                    "value": "second"
-                }
-            ]
+          "name": "Knight",
+          "attributes": [
+            {"name": "colors", "value": ["grey"]},
+            {"name": "realm", "value": "Calabria"},
+            {"name": "edition", "value":  "second"}
+          ]
         },
         {
-            "id": 2,
-            "name": "Clean thy Blade",
-            "attributes": [
-                {
-                    "name": "type",
-                    "value": "ability"
-                }, {
-                    "name": "class",
-                    "value": "knight"
-                }, {
-                    "name": "action",
-                    "value": 0
-                }, {
-                    "name": "power",
-                    "value": -2
-                }
-            ]
+          "name": "Cryomancer",
+          "attributes": [
+            {"name": "colors", "value": ["blue"]},
+            {"name": "realm", "value": "The Skels"},
+            {"name": "edition", "value": "first"}
+          ]
+        },
+        {
+          "name": "Druid",
+          "attributes": [
+            {"name": "colors", "value": ["green"]},
+            {"name": "realm", "value": "The Skels"},
+            {"name": "edition", "value": "second"}
+          ]
         }
-    ]
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "id": 1,
+      "name": "Chastise",
+      "type": ["ability"],
+      "class": "Knight",
+      "action": -1,
+      "range": 2,
+      "power": 1,
+      "control": ["disarm"],
+      "effect": "Silence 3 [silence] target uncontrolled opponent.",
+      "edition": "second",
+      "flavor": "It is not their place to stand against Her.\nTeach them this,@todo"
+    },
+    {
+      "id": 2,
+      "name": "Clean thy Blade",
+      "type": ["ability"],
+      "class": "Knight",
+      "action": 0,
+      "power": -2,
+      "control": ["silence", "disarm"],
+      "effect": "Draw a card for each attack card you’ve resolved this turn.\nBecome chivalrous.",
+      "edition": "second",
+      "flavor": "A clean blade is a keen blade."
+    },
+    {
+      "id": 3,
+      "name": "Daring Strike",
+      "type": ["attack"],
+      "class": "Knight",
+      "action": -1,
+      "power": 1,
+      "range": 1,
+      "effect":  "Deal 4 damage to target enemy.\nStun them.",
+      "edition": "second",
+      "flavor": "Knights have been called unwise.\nStupid. But never coward."
+    },
+    {
+      "id": 4,
+      "name": "Enchanted Lake",
+      "type": ["ability"],
+      "class": "Knight",
+      "action": -1,
+      "power": 1,
+      "control": ["silence"],
+      "effect": "Attach to target tile.\nAt the start of your turn, you may make a tile near Enchanted Lake enchanted terrain.",
+      "edition": "second",
+      "flavor": "Such beauty is found only in Calbria."
+    },
+    {
+      "id": 5,
+      "name": "Enchanted Strike",
+      "type": ["attack"],
+      "class": "Knight",
+      "action": -1,
+      "power": 1,
+      "range": 1,
+      "control": ["silence", "disarm"],
+      "effect": "Deal 5 damage to target enemy.\nMake a tile near you enchanted terrain.",
+      "edition": "second",
+      "flavor": "Where prowess and splendor meet, there is the knight."
+    },
+    {
+      "id": 6,
+      "name": "For the King",
+      "type": ["attack"],
+      "class": "Knight",
+      "action": -2,
+      "power": 2,
+      "range": 1,
+      "control": ["disarm"],
+      "effect": "Deal 5 damage to target enemy.\nSlow 3 [slow] them.",
+      "edition": "second",
+      "flavor": "\"For King Roderic Mayfel!\""
+    },
+    {
+      "id": 7,
+      "name": "Have at Thee",
+      "type": ["attack"],
+      "class": "Knight",
+      "action": -2,
+      "power": 2,
+      "range": 1,
+      "control": ["disarm"],
+      "effect": "Deal 7 damage to target enemy.\nBecome chivalrous.",
+      "edition": "second",
+      "flavor": "She fought with honor. That, and countless hours of training"
+    },
+    {
+      "id": 8,
+      "name": "Have Faith",
+      "type": ["ability"],
+      "class": "Knight",
+      "action": 0,
+      "power": -2,
+      "control": ["disarm"],
+      "effect": "Attach to yourself until your next turn.\nIf you would take damage, instead prevent that damage and put that many cards from the top of your deck into your discard pile.",
+      "edition": "second"
+    },
+    {
+      "id": 9,
+      "name": "Holy Ground",
+      "type": ["ability"],
+      "class": "Knight",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["silence"],
+      "effect": "Make two target tile enchanted terrain.\nDraw a card.",
+      "edition": "second",
+      "flavor": "There are holy sites in Calbria where it is said that no lies may be told."
+    },
+    {
+      "id": 10,
+      "name": "Humble",
+      "type": ["ability"],
+      "class": "Knight",
+      "action": 0,
+      "power": -1,
+      "range": 2,
+      "control": ["silence"],
+      "effect": "Choose one:\n- Destroy target card.\n- Each player discards down to four cards.",
+      "edition": "second"
+    },
+    {
+      "id": 11,
+      "name": "Judgement",
+      "class": "Knight",
+      "type": ["ability"],
+      "action": -1,
+      "power": 2,
+      "range": 2,
+      "control": ["silence"],
+      "effect": "Attach to target opponent.\nAfter they dishonor the code of chivalry, deal 2 damage to them.",
+      "edition": "second",
+      "flavor": "The Lady watches diligently through the eyes of her chosen."
+    },
+    {
+      "id": 12,
+      "name": "Justice",
+      "type": ["attack"],
+      "class": "Knight",
+      "action": -2,
+      "power": -2,
+      "range": 1,
+      "control": ["disarm"],
+      "effect": "Deal 10 damage to target enemy.\nSlow 2 [slow] and Silence 2 [silence] them.",
+      "edition": "second",
+      "flavor": "Let light was from your blade\nand cut away the night."
+    },
+    {
+      "id": 13,
+      "name": "Light of Dawn",
+      "attributes": [
+        {"name": "type", "value": ["ability"]},
+        {"name": "class", "value": "Knight"},
+        {"name": "action", "value": -2},
+        {"name": "power", "value": 2},
+        {"name": "control", "value": ["silence"]},
+        {"name": "effect", "value": "Gain a random relic.\nIf you’ve already gained arelic this game, instead deal 5 damage to each opponent."},
+        {"name": "edition", "value": "second"},
+        {"name": "flavor", "value": "The darkest hour comes\njust before the dawn"}
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Oathstone",
+      "type": ["ability"],
+      "class": "Knight",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control":  ["silence"],
+      "effect": "Attach to target empty tile.\nOpponents near Oathstone can’t expend or pay [initiative].",
+      "edition": "second",
+      "flavor": "Even the wicked are compelled to work no treachery in its shadow."
+    },
+    {
+      "id": 15,
+      "name": "Proclaim",
+      "type": ["ability"],
+      "class": "Knight",
+      "action": -1,
+      "power": 2,
+      "control": ["disarm"],
+      "effect": "Become chivalrous.",
+      "edition": "second",
+      "flavor": "A vow is more than a promise.\nIt is a way of life."
+    },
+    {
+      "id": 16,
+      "name": "Providence",
+      "type": ["ability"],
+      "class": "Knight",
+      "action": 0,
+      "power": -2,
+      "effect": "Heal yourself 4 HP.\nAfter Providence is sent to the discard, draw a card.",
+      "edition": "second",
+      "flavor": "The greatest heroes are forged by darkest rituals."
+    },
+    {
+      "id": 17,
+      "name": "Rebuke",
+      "type": ["ability"],
+      "class": "Knight",
+      "action": 0,
+      "power": -2,
+      "range": 1,
+      "control": ["slow", "silence", "disarm"],
+      "effect": "Counter target card unless its controller pays 3 resources.\nIf the card is countered disarm 3 them.",
+      "edition": "second",
+      "flavor": "The guilty are not always repentant."
+    },
+    {
+      "id": 18,
+      "name": "Reliquary",
+      "type": ["ability"],
+      "class": "Knight",
+      "action": -1,
+      "power": -2,
+      "control": ["silence"],
+      "effect": "You must be chivalrous to play Reliquary.\nGain a random relic.",
+      "edition": "second",
+      "flavor": "Take your prize.\nIt may be just what you need."
+    },
+    {
+      "id": 19,
+      "name": "Stand Aside",
+      "type": ["attack"],
+      "class": "Knight",
+      "action": -1,
+      "power": -1,
+      "range": 1,
+      "control": ["slow", "disarm"],
+      "effect": "Deal 6 damage to target enemy.\nYou may travel them one tile.",
+      "edition": "second",
+      "flavor": "The crossroads of Calbria abound with ruffians keen on prey."
+    },
+    {
+      "id": 20,
+      "name": "Throw the Gauntlet",
+      "type": ["ability"],
+      "class": "Knight",
+      "action": -1,
+      "power": 1,
+      "control": ["slow"],
+      "effect": "Travel another target character one tile towards you, then travel one tile towards them.",
+      "edition": "second",
+      "flavor": "Battle approaches.\nMake your name known."
+    },
+    {
+      "id": 21,
+      "name": "Attrition",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": 0,
+      "power": -1,
+      "range": 2,
+      "control": ["silence", "disarm"],
+      "effect": "Choose one:\n- Destroy target card.\n- Slow 1 [slow] target opponent.",
+      "edition": "second",
+      "flavor": "The Crystal Peaks are landmarks for all the Skels, a reminder of Witer’s grasp.",
+      "artist": "Dario Marzadori"
+    },
+    {
+      "id": 22,
+      "name": "Attrition",
+      "type": ["ability", "debuff"],
+      "class": "Cryomancer",
+      "action": 0,
+      "power": -1,
+      "range": 2,
+      "control": ["silence", "disarm"],
+      "effect": "Choose one:\n- Destroy target card.\n- Slow 1 [slow] target opponent.",
+      "edition": "first",
+      "flavor": "The Crystal Peaks are landmarks for all the Skels, a reminder of Winter’s grasp.",
+      "artist": "Dario Marzadori"
+    },
+    {
+      "id": 23,
+      "name": "Avalanche",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": -2,
+      "power": -4,
+      "control": ["slow", "silence"],
+      "effect": "Make each tile in target lane difficult terrain, then deal 10 damage to each character in those tiles.\nTravel characters damaged this way to an end tile of the lane.",
+      "edition": "second",
+      "artist": "Wasan Techawibulchai"
+    },
+    {
+      "id": 24,
+      "name": "Avalanche",
+      "type": ["debuff", "attack"],
+      "class": "Cryomancer",
+      "action": -2,
+      "power": -5,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Deal 10 damage target enemy and Slow 2 [slow] them.\nAdvantage - deal 6 damage to and Disarm 2 [disarm] them.",
+      "edition": "first",
+      "flavor": "Winter has come."
+    },
+    {
+      "id": 25,
+      "name": "Cold Snap",
+      "type": ["attack"],
+      "class": "Cryomancer",
+      "action": 0,
+      "power": -1,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Deal 3 damage to target controlled opponent.",
+      "edition": "second",
+      "flavor": "Your fingers pop and ice cracks. The cold rushes in to finish the job.",
+      "artist": "Wasan Techawibulchai"
+    },
+    {
+      "id": 26,
+      "name": "Cold Snap",
+      "type": ["attack"],
+      "class": "Cryomancer",
+      "action": 0,
+      "power": -1,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Deal 2 damage to target enemy.\nAdvantage - deal 1 damage to them",
+      "edition": "first",
+      "flavor": "Death by the hand of WInter has eternal consequences."
+    },
+    {
+      "id": 27,
+      "name": "Coldshape",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 2,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Target player gains [mitigate] [mitigate].",
+      "edition": "second",
+      "flavor": "Your hands have woven countless tapestries of fractal beauty.",
+      "artist": "Septimius Ferdian"
+    },
+    {
+      "id": 28,
+      "name": "Coldshape",
+      "type": ["buff"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 2,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Target player gains Mitigate 2.",
+      "edition": "first",
+      "flavor": "Despite the taboo, few clans survive the Winter without a cryomancer.",
+      "artist": "Septimius Ferdian"
+    },
+    {
+      "id": 29,
+      "name": "Cryostasis",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": 0,
+      "power": -2,
+      "instant": true,
+      "effect": "Gain [mitigate] [mitigate] [mitigate] [mitigate] [mitigate].",
+      "edition": "second",
+      "flavor": "With your many moons, it is as if the Winter knows what you wish before even you.",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 30,
+      "name": "Cryostasis",
+      "type": ["instant", "buff"],
+      "class": "Cryomancer",
+      "action": 0,
+      "power": -2,
+      "effect": "Heroic.\nGain Mitigate 5.",
+      "heroic": true,
+      "edition": "first",
+      "flavor": "\"As long as the glaciers stand, so will I.”",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 31,
+      "name": "Crystal Blade",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": 0,
+      "power": -2,
+      "control": ["silence"],
+      "effect": "Attach to yourself.\nAfter you successfully attack a nearby enemy for the first time during your turn, deal 2 damage to and Slow 1 [slow] that enemy.",
+      "edition": "second",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 32,
+      "name": "Crystal Blade",
+      "type": ["aura"],
+      "class": "Cryomancer",
+      "action": 0,
+      "power": -2,
+      "control": ["silence"],
+      "effect": "Attach to yorself.\nThe base range [range] of your attack cards is 1.\nWhen you resolve your first attack card targeting an enemy during your turn, deal 2 damage to and Slow 1 [slow] that player.",
+      "edition": "first",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 33,
+      "name": "Icebolt",
+      "type": ["attack"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Deal 3 damage to target enemy.\nAdvantage - deal 2 more damage to them.",
+      "edition": "second",
+      "flavor": "The Winter is malleable, but only to those who believe it can be.",
+      "artist": "Mario Vazquez"
+    },
+    {
+      "id": 34,
+      "name": "Icebolt",
+      "type": ["attack"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Deal 3 damage to target enemy.\nAdvantage - deal 2 damage to them.",
+      "edition": "first",
+      "flavor": "The Winter is malleable, but only to those who believe it can be.",
+      "artist": "Mario Vazquez"
+    },
+    {
+      "id": 35,
+      "name": "Permafrost",
+      "type": ["ability"],
+      "class": "Cryomencer",
+      "action": -2,
+      "power": 2,
+      "range": 2,
+      "control": ["silence"],
+      "effect": "Make target empty tile Difficult Terrain [difficult-terrain], then attach Permafrost to that tile.\nAt the end of your turn, Slow 2 [slow] each opponent near Permafrost.",
+      "edition": "second",
+      "artist": "Mario Vazquez"
+    },
+    {
+      "id": 36,
+      "name": "Everfrost",
+      "type": ["aura"],
+      "class": "Cryomencer",
+      "action": -1,
+      "power": -1,
+      "range": 2,
+      "control": ["silence"],
+      "effect": "Attach to target enemy.\nAt the end of your turn, Slow 1 [slow] them.",
+      "edition": "first",
+      "flavor": "Winter magic feeds the Winter. With each cast, its domain spreads further.",
+      "artist": "Dario Marzadori"
+    },
+    {
+      "id": 37,
+      "name": "Rime Shock",
+      "type": ["attack"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": -1,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Deal 6 damage to target enemy.\nAdvantage - Slow 2 [slow] them.",
+      "edition": "second",
+      "flavor": "Cold gathers near your palm. It waits patiently to be unleashed.",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 38,
+      "name": "Rime Shock",
+      "type": ["attack", "debuff"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": -1,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Deal 6 damage to target enemy.\nAdvantage - Slow 2 [slow] them.",
+      "edition": "first",
+      "flavor": "\"Careful who you use our magic around. Not all folks will understand.\"",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 39,
+      "name": "Shatter",
+      "type": ["attack"],
+      "class": "Cryomancer",
+      "action": -2,
+      "power": -2,
+      "range": 2,
+      "control": ["silence", "disarm"],
+      "effect": "Deal 8 damage to target controlled opponent.\nRemove all control affecting them and stun them for each control token removed this way.",
+      "edition": "second",
+      "artist": "Septimius Ferdian"
+    },
+    {
+      "id": 40,
+      "name": "Shatter",
+      "type": ["ability", "attack"],
+      "class": "Cryomancer",
+      "action": -2,
+      "power": -2,
+      "range": 2,
+      "control": ["silence", "disarm"],
+      "effect": "Deal 8 damage to target enemy.\nAdvantage - deal 5 damage and remove all Control affecting them.",
+      "edition": "first",
+      "artist": "Septimius Ferdian"
+    },
+    {
+      "id": 41,
+      "name": "Sleet Blast",
+      "type": ["attack"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Deal 4 damage to target enemy.\nDisarm 1 [disarm] them.",
+      "edition": "second",
+      "artist": "Selver Dervisic"
+    },
+    {
+      "id": 42,
+      "name": "Sleet Blast",
+      "type": ["debuff", "attack"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Deal 4 damage to target enemy.\nDisarm 1 [disarm] them.",
+      "edition": "first",
+      "flavor": "Some of them are bound to break. All of them are bound to hurt.",
+      "artist": "Selver Dervisic"
+    },
+    {
+      "id": 43,
+      "name": "Snow Blast",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["slow", "disarm"],
+      "effect": "Travel another target character up to one tile away from you.\nSlow 1 [slow] them.",
+      "edition": "second",
+      "flavor": "You know it isn’t right to kill with the Winter. It’s unnatural. Otherworldly.",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 44,
+      "name": "Snow Blast",
+      "type": ["travel", "debuff"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["slow", "disarm"],
+      "effect": "Travel another target player up to one tile away from you.\nSlow 1 [slow] them.",
+      "edition": "first",
+      "flavor": "The most important virtue in a cryomancer is patience.",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 45,
+      "name": "Snowslide",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["silence"],
+      "effect": "Make target tile difficult terrain.\nDraw a card.",
+      "edition": "second",
+      "flavor": "To command snow to flow like water is the first test to become a cryomancer.",
+      "artist": "Dario Marzadori"
+    },
+    {
+      "id": 46,
+      "name": "Snowslide",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["silence"],
+      "effect": "Make target tile difficult terrain.\nDraw a card.",
+      "edition": "first",
+      "flavor": "Destructive weather is frequently blamed on the local cryomancer.",
+      "artist": "Dario Marzadori"
+    },
+    {
+      "id": 47,
+      "name": "Thin Ice",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "control": ["slow", "silence"],
+      "instant": true,
+      "effect": "Counter target card controlled by a player near terrain unless they pay 2 resources.",
+      "edition": "second",
+      "flavor": "A single misstep can end a life.",
+      "artist": "Septimius Ferdian"
+    },
+    {
+      "id": 48,
+      "name": "Thin Ice",
+      "type": ["instant", "ability"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["slow", "silence"],
+      "instant": true,
+      "effect": "Counter target card controlled by a player in Terrain unless they pay 2 Resources.",
+      "edition": "first",
+      "flavor": "A single misstep can end a life.",
+      "artist": "Septimius Ferdian"
+    },
+    {
+      "id": 49,
+      "name": "Wintertide",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["slow", "silence"],
+      "instant": true,
+      "effect": "Choose one:\n- return target attached caard to its owner’s hand.\n- make target tile difficult terrain.",
+      "edition": "second",
+      "artist": "Dario Marzadori"
+    },
+    {
+      "id": 50,
+      "name": "Wintertide",
+      "type": ["instant", "ability"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["slow", "silence"],
+      "instant": true,
+      "effect": "Choose one:\n- Return target card from the field to its owner’s hand.\n- Make target tile Difficult Terrain [difficult-terrain].",
+      "edition": "first",
+      "flavor": "Since the Winterburst, Winter magic has grown more and more potent.",
+      "artist": "Dario Marzadori"
+    },
+    {
+      "id": 51,
+      "name": "Flash Freeze",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": -1,
+      "range": 2,
+      "control": ["slow", "silence", "disarm"],
+      "instant": true,
+      "effect": "Stun target opponent.\nSlow 1 [slow] and Disarm 1 [disarm] them.",
+      "edition": "second",
+      "flavor": "No amount of furs will prepare them for absolute zero.",
+      "artist": "Septimius Ferdian"
+    },
+    {
+      "id": 52,
+      "name": "Flash Freeze",
+      "type": ["instant", "ability", "debuff"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": -1,
+      "range": 2,
+      "control": ["slow", "silence", "disarm"],
+      "instant": true,
+      "effect": "Stun target enemy.\nSlow 1 [slow] and Disarm 1 [disarm] them.",
+      "edition": "first",
+      "flavor": "Practitioners of ryomancy draw the ire of the Huntsmen, regardless of their intentions.",
+      "artist": "Septimius Ferdian"
+    },
+    {
+      "id": 53,
+      "name": "Fractal Burst",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": 0,
+      "power": -1,
+      "control": ["silence", "disarm"],
+      "effect": "Draw a card.\nAttach to yourself.\nDuration - gain [power].",
+      "edition": "second",
+      "flavor": "One must find comfort somewhere while living in these desolate isles.",
+      "artist": "Alexandra Schastlivaya"
+    },
+    {
+      "id": 54,
+      "name": "Fractal Burst",
+      "type": ["ability", "buff"],
+      "class": "Cryomancer",
+      "action": 0,
+      "power": -1,
+      "control": ["silence", "disarm"],
+      "effect": "Draw a card.\nAttach to yourself.\nDuration 3 - gain 1 [power].",
+      "edition": "first",
+      "artist": "Alexandra Schastlivaya"
+    },
+    {
+      "id": 55,
+      "name": "Frostsnatch",
+      "type": ["ability"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": -2,
+      "range": 2,
+      "control": ["slow", "silence", "disarm"],
+      "instant": true,
+      "effect": "Counter target card unless its controller spends 3 Resources.\nIf that card is countered, Slow 2 [slow] the card’s controller.",
+      "edition": "second",
+      "artist": "Wadim Kashin"
+    },
+    {
+      "id": 56,
+      "name": "Frostsnatch",
+      "type": ["instant", "ability", "debuff"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": -2,
+      "range": 2,
+      "control": ["slow", "silence", "disarm"],
+      "instant": true,
+      "effect": "Counter target card unless its controller spends 3 resources.\nIf that card is countered, Slow 2 [slow] that card’s controller.",
+      "edition": "first",
+      "artist": "Wadim Kashin"
+    },
+    {
+      "id": 57,
+      "name": "Glacialize",
+      "type": ["attack"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Deal 4 damage to target enemy.\nSilence 1 [silence] them.",
+      "edition": "second",
+      "flavor": "Your skills with the Winter inspires fear across all the clans.",
+      "artist": "Septimius Ferdian"
+    },
+    {
+      "id": 58,
+      "name": "Glacialize",
+      "type": ["debuff", "attack"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Deal 4 damage to target enemy.\nSilence 1 [silence] them.",
+      "edition": "first",
+      "flavor": "Commonfolk use the phrase ‘a glacial pace’ to describe the deceptively quick.",
+      "artist": "Septimius Ferdian"
+    },
+    {
+      "id": 59,
+      "name": "Hailstorm",
+      "type": ["silence", "disarm"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": -2,
+      "range": 2,
+      "control": ["silence", "disarm"],
+      "effect": "Deal 7 damage to target enemy.\nAdvantage - make two tiles near them difficult terrain.",
+      "edition": "second",
+      "flavor": "Cryomancers will sometimes loose a storm away from the village to protect it.",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 60,
+      "name": "Hailstorm",
+      "type": ["ability", "attack"],
+      "class": "Cryomancer",
+      "action": -1,
+      "power": -2,
+      "range": 2,
+      "control": ["silence", "disarm"],
+      "effect": "Deal 5 damage to target enemy and make target tile difficult terrain.\nAdvantage - deal 3 damage to them and make the tile they are in difficult terrain.",
+      "edition": "first",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 61,
+      "name": "Brambleroots",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": -1,
+      "power": 1,
+      "control": ["disarm"],
+      "effect": "Slow 3 [slow] target opponent in Terrain.",
+      "edition": "second",
+      "flavor": "The forest knows who its enemies are.",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 62,
+      "name": "Druidic Lore",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": -1,
+      "power": 2,
+      "control": ["silence"],
+      "effect": "Seek",
+      "edition": "second",
+      "flavor": "Times long ago reveal the path to a better future.",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 63,
+      "name": "Druidic Strike",
+      "type": ["attack"],
+      "class": "Druid",
+      "action": -1,
+      "power": 1,
+      "range": 1,
+      "control": ["silence", "disarm"],
+      "effect": "Deal 4 damage to target enemy.\nSeek.",
+      "edition": "second",
+      "flavor": "Violence brings the clearest visions.",
+      "artist": "Selver Dervisic"
+    },
+    {
+      "id": 64,
+      "name": "Emerald Seed",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": 0,
+      "power": 1,
+      "control": ["silence"],
+      "effect": "Attach to target empty tile near terrain.\nAt the end of your turn, if you’re near Emerald Seed, heal yourself 1 HP.",
+      "edition": "second",
+      "flavor": "It gives you hope that the isles will go on.",
+      "artist": "Dario Marzadori"
+    },
+    {
+      "id": 65,
+      "name": "Grove",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": -1,
+      "power": -3,
+      "range": 2,
+      "control": ["silence"],
+      "effect": "Attach to target empty tile.\nAt the end of your turn, if you’re near Grove, you may attach a card from your discard to yourself.",
+      "edition": "second",
+      "flavor": "Where the old ways are strongest.",
+      "artist": "Dario Marzadori"
+    },
+    {
+      "id": 66,
+      "name": "Memory of Yore",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": 0,
+      "power": -1,
+      "control": ["silence"],
+      "effect": "Return a card that generates [power] from your discard to the top of your deck.",
+      "edition": "second",
+      "flavor": "The kiss of the wind, warm and kind. The rush of the river, sure and steady.",
+      "artist": "Dario Marzadori"
+    },
+    {
+      "id": 67,
+      "name": "Replenish",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": -2,
+      "power": 2,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Attach to target player.\nDuration - heal them 2 HP.",
+      "edition": "second",
+      "flavor": "The woods themselves whisper their thanks on tje wind.",
+      "artist": "Alexandra Schastlivaya"
+    },
+    {
+      "id": 68,
+      "name": "Reseed",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": -1,
+      "power": 1,
+      "range": 1,
+      "control": ["silence"],
+      "effect": "Make two target tiles difficult terrain.",
+      "edition": "second",
+      "flavor": "Nature will reclaim these lands. You will ensure it.",
+      "artist": "Blake Rottinger"
+    },
+    {
+      "id": 69,
+      "name": "Restoration",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": 0,
+      "power": -2,
+      "range": 2,
+      "effect": "Choose one:\n- Destroy target card.\n- Return an Ability card from your discard to your hand.",
+      "edition": "second",
+      "artist": "Septimius Ferdian"
+    },
+    {
+      "id": 70,
+      "name": "Return To Myth",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": -1,
+      "power": -1,
+      "range": 1,
+      "control": ["slow", "silence"],
+      "instant": true,
+      "effect": "Counter target card unless its controller spends 3 resources.\nSeek",
+      "edition": "second",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 71,
+      "name": "Revitalize",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": -1,
+      "power": -2,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Attach to target player.\nDuration - heal them 3 HP.",
+      "edition": "second",
+      "flavor": "As the lands heal, so do you.",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 72,
+      "name": "Slash of Yore",
+      "type": ["attack"],
+      "class": "Druid",
+      "action": -1,
+      "power": -2,
+      "range": 1,
+      "control": ["silence", "disarm"],
+      "effect": "Deal 5 damage to target enemy.\nYou may return an attack card with a resource cost of 1 or less from your discard to your hand.",
+      "edition": "second",
+      "flavor": "Time is a web to be scattered.",
+      "artist": "Selver Dervisic"
+    },
+    {
+      "id": 73,
+      "name": "Thicket",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": -2,
+      "power": 2,
+      "range": 2,
+      "control": ["silence"],
+      "effect": "Make target empty tile and another tile near it difficult terrain, then attach Thicket to the target tile.\nAfter an opponent enters Thicket, stun them.",
+      "edition": "second",
+      "artist": "Wasan Techawibulchai"
+    },
+    {
+      "id": 74,
+      "name": "Thornpath",
+      "type": ["attack"],
+      "class": "Druid",
+      "action": -1,
+      "power": -1,
+      "range": 1,
+      "control": ["slow", "disarm"],
+      "effect": "Choose one:\n- Travel up to two tiles.\n- Deal 6 damage to target enemy.",
+      "edition": "second",
+      "flavor": "You’ve not travelled this far to fall before such a foe.",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 75,
+      "name": "Thrive",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": 0,
+      "power": -2,
+      "range": 1,
+      "control": ["silence"],
+      "effect": "Attach to yourself.\nAt the end of your turn, make target tile difficult terrain.",
+      "edition": "second",
+      "flavor": "Throughout the isles, the druids bring life back from the brink of the Winter’s jaws.",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 76,
+      "name": "Verdant Slash",
+      "type": ["attack"],
+      "class": "Druid",
+      "action": -1,
+      "power": -2,
+      "range": 1,
+      "control": ["disarm"],
+      "effect": "Deal 6 damage to target enemy.\nAttach to yourself.\nDuration - heal yourself 2 HP.",
+      "edition": "second",
+      "flavor": "Their bones honor the isles by seeding new growth.",
+      "artist": "Wasan Techawibulchai"
+    },
+    {
+      "id": 77,
+      "name": "Verdant Strike",
+      "type": ["attack"],
+      "class": "Druid",
+      "action": -1,
+      "power": 1,
+      "range": 1,
+      "control": ["disarm"],
+      "effect": "Deal 4 damage to target enemy.\nAttach to yourself.\nDuration - heal yourself 1 HP.",
+      "edition": "second",
+      "flavor": "From their blood will spring flowers and summer will return once more.",
+      "artist": "Wadim Kashin"
+    },
+    {
+      "id": 78,
+      "name": "Vine Snap",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": -1,
+      "power": 1,
+      "range": 2,
+      "control": ["disarm"],
+      "effect": "Attach to target empty tile.\nAfter an enemy enters Vine Snap, destroy Vine Snap and deal 5 damage to them.\nAt the start of your turn, if no player is on Vine Snap, each opponent travels to Vine Snap unless they pay 1 resource.",
+      "edition": "second",
+      "artist": "Dario Marzadori"
+    },
+    {
+      "id": 79,
+      "name": "Wispform",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": 0,
+      "power": -2,
+      "range": 2,
+      "instant": true,
+      "effect": "Travel to target tile.",
+      "edition": "second",
+      "flavor": "Few even believe wisps still exist. Even fewer know they do.",
+      "artist": "Wojtek Depczyński"
+    },
+    {
+      "id": 80,
+      "name": "Wonder",
+      "type": ["ability"],
+      "class": "Druid",
+      "action": 0,
+      "power": -1,
+      "range": 2,
+      "control": ["slow", "disarm"],
+      "instant": true,
+      "effect": "Silence 2 [silence] target opponent.",
+      "edition": "second",
+      "flavor": "There is tranquility here that all should strive for. They see that now.",
+      "artist": "Alexandra Schastlivaya"
+    }
+  ]
 }

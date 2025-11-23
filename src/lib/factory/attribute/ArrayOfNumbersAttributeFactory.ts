@@ -2,9 +2,9 @@ import Attribute from "../../dto/Attribute"
 import AttributeFactoryInterface from "./AttributeFactoryInterface"
 
 export default class ArrayOfNumbersAttributeFactory implements AttributeFactoryInterface {
-    public build(name: string, payload: Record<string, any>): Attribute {
+    public build(payload: Record<string, any>, name: string): Attribute {
         if (!Array.isArray(payload.value)) {
-            throw new Error(`Invalid attribute value for attribute ${name}: ${typeof payload.value}`)
+            throw new Error(`[ArrayOfNumbersAttributeFactory] Invalid attribute value for attribute ${name}: ${typeof payload.value}`)
         }
 
         return {
@@ -16,7 +16,7 @@ export default class ArrayOfNumbersAttributeFactory implements AttributeFactoryI
                     return value
                 }
 
-                throw new Error(`Invalid attribute value for ${name}: ${type}`)
+                throw new Error(`[ArrayOfNumbersAttributeFactory] Invalid attribute value for ${name}: ${type}`)
             })
         }
     }

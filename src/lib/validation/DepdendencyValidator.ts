@@ -1,12 +1,12 @@
 import Attribute from "../dto/Attribute"
-import Card from "../dto/Card"
 import ValidationRule, { DependentValidationRule } from "../dto/ValidationRule"
-import ValidatorInterface from "./ValidatorInterface"
+import CardValidatorInterface from "./CardValidatorInterface"
+import CardInterface from "../dto/CardInterface"
 
-export default class DepdencyValidator implements ValidatorInterface {
-    public validate(card: Card, rule: ValidationRule): void | never {
+export default class DependencyValidator implements CardValidatorInterface {
+    public validate(card: CardInterface, rule: ValidationRule): void | never {
         if (rule.type !== "dependency") {
-            throw new Error(`Missconfigured validation rule of type ${rule.type} for DepdendencyValidator.`)
+            throw new Error(`[DependencyValidator] Miss-configured validation rule of type ${rule.type}.`)
         }
         
         const attribute: Attribute | undefined = card.attributes.find((a: Attribute): boolean => a.name === rule.attribute)
@@ -24,11 +24,11 @@ export default class DepdencyValidator implements ValidatorInterface {
         const ifAttribute: Attribute | undefined = card.attributes.find((a: Attribute): boolean => a.name === rule.ifAttribute)
 
         if (ifAttribute === undefined && rule.status === "required") {
-            throw new Error(`[DepdendencyValidator] Attribute "${rule.ifAttribute}" is required if "${rule.attribute}"`)
+            throw new Error(`[DependencyValidator] Attribute "${rule.ifAttribute}" is required if "${rule.attribute}"`)
         }
 
         if (ifAttribute !== undefined && rule.status === "forbidden") {
-            throw new Error(`[DepdendencyValidator] Attribute "${rule.ifAttribute}" is forbidden if "${rule.attribute}"`)
+            throw new Error(`[DependencyValidator] Attribute "${rule.ifAttribute}" is forbidden if "${rule.attribute}"`)
         }
     }
     

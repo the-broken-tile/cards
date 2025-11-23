@@ -1,38 +1,55 @@
 import AttributeType from "./AttributeType"
+import Entity from "./Entity"
 
-declare type BaseAttribute = {
+type BaseAttribute = {
     readonly name: string
     readonly type: AttributeType
 }
-declare type StringAttribute = BaseAttribute & {
+type StringAttribute = BaseAttribute & {
     readonly type: "string"
     readonly value: string
 }
+type TextAttribute = BaseAttribute & {
+  readonly type: "text"
+  readonly value: string
+}
+type EntityAttribute = BaseAttribute & {
+  readonly type: "entity"
+  readonly value: Entity | string
+}
 
-declare type NumberAttribute = BaseAttribute & {
+type EnumAttribute = BaseAttribute & {
+  readonly type: "enum"
+  readonly value: string | string[]
+}
+
+type NumberAttribute = BaseAttribute & {
     readonly type: "number"
     readonly value: number
 }
 
-declare type ArrayOfStringsAttribute = BaseAttribute & {
+type ArrayOfStringsAttribute = BaseAttribute & {
     readonly type: "string[]"
     readonly value: string[]
 }
 
-declare type ArrayOfNumbersAttribute = BaseAttribute & {
+type ArrayOfNumbersAttribute = BaseAttribute & {
     readonly type: "number[]"
     readonly value: number[]
 }
 
-declare type BooleanAttribute = BaseAttribute & {
+type BooleanAttribute = BaseAttribute & {
     readonly type: "boolean"
     readonly value: boolean
 }
 
-declare type Attribute = StringAttribute
-    | NumberAttribute
-    | ArrayOfStringsAttribute
-    | ArrayOfNumbersAttribute
-    | BooleanAttribute
+type Attribute = StringAttribute
+  | TextAttribute
+  | NumberAttribute
+  | ArrayOfStringsAttribute
+  | ArrayOfNumbersAttribute
+  | BooleanAttribute
+  | EnumAttribute
+  | EntityAttribute
 
 export default Attribute

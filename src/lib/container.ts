@@ -11,41 +11,91 @@ import AttributeDefinitionRequiredValidationRuleFactory from "./factory/validati
 
 import Validator from "./validation/Validator"
 import EnumValidator from "./validation/EnumValidator"
-import DepdencyValidator from "./validation/DepdendencyValidator"
-import RequiredAttributesValidadator from "./validation/RequiredAttributesValidator"
+import DependencyValidator from "./validation/DepdendencyValidator"
+import RequiredAttributesValidator from "./validation/RequiredAttributesValidator"
 import ValidationRuleFactory from "./factory/validation/ValidationRuleFactory"
 import AttributeDefinitionEnumValidationFactory from "./factory/validation/AttributeDefinitionEnumValidationFactory"
 import ConflictsValidationRuleFactory from "./factory/validation/ConflictsValidationRuleFactory"
+import DummyValidator from "./validation/DummyValidator"
+import DuplicateIdValidator from "./validation/DuplicateIdValidator"
+import RequiredIfMissingValidationRuleFactory from "./factory/validation/RequiredIfMissingValidationRuleFactory"
+import AttributeRequiredIfAnotherMissingValidator from "./validation/AttributeRequiredIfAnotherMissingValidator"
+import UniqueAttributeNamesValidator from "./validation/UniqueAttributeNamesValidator"
+import EntitiesFactory from "./factory/EntitiesFactory"
+import EntityFactory from "./factory/EntityFactory"
+import EntityMapper from "./factory/EntityMapper"
+import EnumAttributeFactory from "./factory/attribute/EnumAttributeFactory"
+import EntityAttributeFactory from "./factory/attribute/EntityAttributeFactory"
+import GameRepository from "./GameRepository"
+import NormalizedCardFactory from "./factory/NormalizedCardFactory"
+import CardFactoryManager from "./factory/CardFactoryManager"
+import MinValueValidationRuleFactory from "./factory/validation/MinValueValidationRuleFactory"
+import MaxValueValidationRuleFactory from "./factory/validation/MaxValueValidationRuleFactory";
+import MinValueValidator from "./validation/MinValueValidator";
+import MaxValueValidator from "./validation/MaxValueValidator";
 
 const validationRuleFactory: ValidationRuleFactory = new ValidationRuleFactory([
-    new AttributeDefinitionEnumValidationFactory(),
-    new AttributeDefinitionRequiredValidationRuleFactory(),
-    new ConflictsValidationRuleFactory(),
+  new AttributeDefinitionEnumValidationFactory(),
+  new AttributeDefinitionRequiredValidationRuleFactory(),
+  new ConflictsValidationRuleFactory(),
+  new RequiredIfMissingValidationRuleFactory(),
+  new MinValueValidationRuleFactory(),
+  new MaxValueValidationRuleFactory(),
 ])
 
-const cardFactory: CardFactory = new CardFactory(
-    new AttributeFactory({
-        "string": new StringAttributeFactory(),
-        "enum": new StringAttributeFactory(),
-        "string[]": new ArrayOfStringsAttributeFactory(),
-        "number": new NumberAttributeFactory(),
-        "number[]": new ArrayOfNumbersAttributeFactory(),
-        "boolean": new BooleanAttributeFactory(),
-    }),
-)
-
-const validator: Validator = new Validator({
-    "enum": new EnumValidator(),
-    "dependency": new DepdencyValidator(),
-    "requiredAttributes": new RequiredAttributesValidadator(),
+const stringAttributeFactory: StringAttributeFactory = new StringAttributeFactory()
+const attributeFactory: AttributeFactory = new AttributeFactory({
+  "string": stringAttributeFactory,
+  "text": stringAttributeFactory,
+  "enum": new EnumAttributeFactory(),
+  "entity": new EntityAttributeFactory(),
+  "string[]": new ArrayOfStringsAttributeFactory(),
+  "number": new NumberAttributeFactory(),
+  "number[]": new ArrayOfNumbersAttributeFactory(),
+  "boolean": new BooleanAttributeFactory(),
 })
 
-const attributeDefintionFacotry: AttributeDefinitionFactory = new AttributeDefinitionFactory()
+const cardFactory: CardFactory = new CardFactory(attributeFactory)
+const cardFactoryManager: CardFactoryManager = new CardFactoryManager([
+  cardFactory,
+  new NormalizedCardFactory(attributeFactory),
+])
+const validator: Validator = new Validator({
+    "enum": new EnumValidator(),
+    "dependency": new DependencyValidator(),
+    "requiredAttributes": new RequiredAttributesValidator(),
+    "requiredIfMissing": new AttributeRequiredIfAnotherMissingValidator(),
+    "uniqueAttributeNames": new UniqueAttributeNamesValidator(),
+    "min": new MinValueValidator(),
+    "max": new MaxValueValidator(),
+    "uniqueIds": new DummyValidator(), // @todo change this
+  },
+  [
+    new DuplicateIdValidator(),
+  ],
+)
 
-const gameFactory: GameFactory = new GameFactory(cardFactory, validator, attributeDefintionFacotry, validationRuleFactory)
+const attributeDefinitionFactory: AttributeDefinitionFactory = new AttributeDefinitionFactory()
+const entityFactory: EntitiesFactory = new EntitiesFactory(attributeDefinitionFactory, new EntityFactory(attributeFactory))
+
+const gameFactory: GameFactory = new GameFactory(
+  cardFactoryManager,
+  validator,
+  attributeDefinitionFactory,
+  validationRuleFactory,
+  entityFactory,
+  new EntityMapper(),
+  [
+    { type: "uniqueIds" },
+    { type: "uniqueAttributeNames" },
+  ]
+)
+
+const gameRepository: GameRepository = new GameRepository(gameFactory)
 
 export {
-    cardFactory,
-    gameFactory,
-    validator,
+  cardFactory,
+  gameFactory,
+  validator,
+  gameRepository
 }

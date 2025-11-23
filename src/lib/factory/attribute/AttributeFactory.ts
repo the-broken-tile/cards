@@ -9,7 +9,7 @@ export default class AttributeFactory {
 
     public build(payload: Record<string, any>, attributeDefinition: AttributeDefinition): Attribute {
         if (typeof payload.name !== "string") {
-            throw new Error("missing attribute name.")
+            throw new Error("[AttributeFactory] Invalid attribute name.")
         }
 
         const name: string = payload.name
@@ -17,9 +17,9 @@ export default class AttributeFactory {
         const factory: AttributeFactoryInterface | undefined = this.attributeFactories[attributeDefinition.type]
 
         if (factory === undefined) {
-            throw new Error("missing attribute type.")
+            throw new Error(`[AttributeFactory] Missing factory for attribute type "${attributeDefinition.type}".`)
         }
         
-        return factory.build(name, payload)
+        return factory.build(payload, name)
     }
 }

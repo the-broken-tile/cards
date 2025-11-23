@@ -1,5 +1,5 @@
 import Attribute from "../../dto/Attribute";
 
 export default interface AttributeFactoryInterface {
-    build(name: string, payload: Record<string, any>): Attribute
+    build(payload: Record<string, any>, name?: string): Attribute
 }
