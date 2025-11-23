@@ -13,7 +13,6 @@ export default class NormalizedCardFactory implements CardFactoryInterface {
 
   public build(payload: Record<string, any>, attributeDefinitions: AttributeDefinition[]): Card {
     const { id, name, ...attributes } = payload
-    console.log(attributes)
 
     return new Card(
       id,
