@@ -14,7 +14,10 @@ export default class Game implements GameInterface {
   ) {
   }
 
-  public toJSON(): Record<string, any>[] {
-    return this.cards
+  public toJSON(): Record<string, any> {
+    return {
+      name: this.name,
+      cards: this.cards,
+    }
   }
 }
