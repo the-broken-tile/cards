@@ -43,8 +43,10 @@ const validationRuleFactory: ValidationRuleFactory = new ValidationRuleFactory([
   new MaxValueValidationRuleFactory(),
 ])
 
+const stringAttributeFactory: StringAttributeFactory = new StringAttributeFactory()
 const attributeFactory: AttributeFactory = new AttributeFactory({
-  "string": new StringAttributeFactory(),
+  "string": stringAttributeFactory,
+  "text": stringAttributeFactory,
   "enum": new EnumAttributeFactory(),
   "entity": new EntityAttributeFactory(),
   "string[]": new ArrayOfStringsAttributeFactory(),

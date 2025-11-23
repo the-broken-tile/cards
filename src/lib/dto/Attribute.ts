@@ -9,6 +9,10 @@ type StringAttribute = BaseAttribute & {
     readonly type: "string"
     readonly value: string
 }
+type TextAttribute = BaseAttribute & {
+  readonly type: "text"
+  readonly value: string
+}
 type EntityAttribute = BaseAttribute & {
   readonly type: "entity"
   readonly value: Entity | string
@@ -40,6 +44,7 @@ type BooleanAttribute = BaseAttribute & {
 }
 
 type Attribute = StringAttribute
+  | TextAttribute
   | NumberAttribute
   | ArrayOfStringsAttribute
   | ArrayOfNumbersAttribute

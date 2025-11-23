@@ -50,12 +50,12 @@
     {"name": "power", "type": "number", "required": true, "min": -5, "max": 4},
     {"name": "range", "type": "number", "min": 0, "max": 3},
     {"name": "control", "type": "string[]", "enum": ["slow", "silence", "disarm"]},
-    {"name": "effect", "type": "string", "required":  true},
+    {"name": "effect", "type": "text", "required":  true},
     {"name": "instant", "type": "boolean"},
     {"name": "ultimate", "type": "boolean"},
     {"name": "heroic", "type": "boolean"},
     {"name": "edition", "type": "string", "enum": ["first", "second"], "required": true},
-    {"name": "flavor", "type": "string"},
+    {"name": "flavor", "type": "text"},
     {"name": "artist", "type": "string"}
   ],
   "entities": [
