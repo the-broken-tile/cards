@@ -20,7 +20,12 @@ export default class GameRepository {
     return this.cached[name]
   }
 
-  public async allNames(): Promise<string[]> {
-    return Object.keys(definitions)
+  /**
+   * [slug, name] tuples
+   */
+  public async allNames(): Promise<[string, string][]> {
+    return Object.keys(definitions).map((key: string): [string, string] => {
+      return [definitions[key].slug, definitions[key].name]
+    })
   }
 }

@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react"
-import { Link } from "react-router"
+import {useState, useEffect, JSX} from "react"
 
 import { gameRepository } from '../../lib/container'
 import Loading from "../components/Loading"
+import GameLink from "../components/GameLink"
 
-export default function Index() {
-  const [gameList, setGameList] = useState<string[]|null>(null)
+export default function Index(): JSX.Element {
+  const [gameList, setGameList] = useState<[string, string][]|null>(null)
 
   const fetchGame = async (): Promise<void> => {
     setGameList(await gameRepository.allNames())
@@ -20,6 +20,6 @@ export default function Index() {
   }
 
   return <ul>
-    {gameList.map((name: string, i: number) => <li key={i}><Link to={`/${name.toLowerCase()}`}>{name}</Link></li>)}
+    {gameList.map(([slug, name]: [string, string], i: number) => <li key={i}><GameLink name={name} slug={slug} /></li>)}
   </ul>
 }

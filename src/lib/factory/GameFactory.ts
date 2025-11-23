@@ -24,11 +24,16 @@ export default class GameFactory {
   public build(payload: Record<string, any>): Game {
     const nameType: string = typeof payload.name
     if (nameType !== "string") {
-      throw new Error(`[GameFactory] Invalid name of type ${nameType}`)
+      throw new Error(`[GameFactory] Invalid name of type "${nameType}".`)
+    }
+
+    const slugType: string = typeof payload.slug
+    if (slugType !== "string") {
+      throw new Error(`[GameFactory] Invalid slug of type "${slugType}" in ${payload.name}.`)
     }
 
     if (!Array.isArray(payload.cards)) {
-      throw new Error(`[GameFactory] Missing cards in ${payload.name}`)
+      throw new Error(`[GameFactory] Missing cards in ${payload.name}.`)
     }
 
     if (!Array.isArray(payload.attributes)) {
@@ -41,6 +46,7 @@ export default class GameFactory {
 
     const game: Game = new Game(
       payload.name,
+      payload.slug,
       payload.attributes, // @todo maybe use factory
       payload.cards.map((card: Record<string, any>): CardInterface => this.cardFactory.build(card, attributeDefinitions)),
       this.validationRules(payload.attributes),

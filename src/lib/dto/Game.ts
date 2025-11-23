@@ -7,6 +7,7 @@ import CardInterface from "./CardInterface"
 export default class Game implements GameInterface {
   constructor(
     public readonly name: string,
+    public readonly slug: string,
     public readonly attributes: Attribute[],
     public readonly cards: CardInterface[],
     public readonly validationRules: ValidationRule[],

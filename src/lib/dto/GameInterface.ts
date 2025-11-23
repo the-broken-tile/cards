@@ -5,6 +5,7 @@ import Entity from "./Entity"
 
 export default interface GameInterface {
   readonly name: string
+  readonly slug: string
   readonly cards: CardInterface[]
   readonly attributes: Attribute[]
   readonly validationRules: ValidationRule[]
