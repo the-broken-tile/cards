@@ -5,7 +5,9 @@ import { List, ListItem } from "@mui/material"
 import { gameRepository } from '../../lib/container'
 import GameInterface from "../../lib/dto/GameInterface"
 
+import Error from "../components/Error"
 import Loading from "../components/Loading"
+
 const EXAMPLE_DECK: string = "DwgAAIAACAAAgAAIAACAAAgAAIAACAAAgAAIAACAAAgAAIAACAAAgAAIAACAAAgAAIAA"
 
 export default function Game(): JSX.Element {
@@ -29,7 +31,7 @@ export default function Game(): JSX.Element {
   }, [])
 
   if (error !== null) {
-    return <>Error: {error}</>
+    return <Error message={error} />
   }
 
   if (game === null) {
