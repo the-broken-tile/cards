@@ -20,7 +20,7 @@ export default function DeckView({deck, onCountChange}: Props): JSX.Element {
     <List>
       {deck.cards.map((card: DeckCard, i: number): JSX.Element =>
         <ListItem key={i}>
-          <DeckCardView card={card} count={card.count} onChange={(n: number): void => handleCardAdd(n, card)} />
+          <DeckCardView card={card} onChange={(n: number): void => handleCardAdd(n, card)} />
         </ListItem>
       )}
     </List>

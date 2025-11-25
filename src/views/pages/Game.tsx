@@ -5,7 +5,7 @@ import { List, ListItem } from "@mui/material"
 import { gameRepository } from '../../lib/container'
 import GameInterface from "../../lib/dto/GameInterface"
 
-import Error from "../components/Error"
+import ErrorMessage from "../components/ErrorMessage"
 import Loading from "../components/Loading"
 
 const EXAMPLE_DECK: string = "DwgAAIAACAAAgAAIAACAAAgAAIAACAAAgAAIAACAAAgAAIAACAAAgAAIAACAAAgAAIAA"
@@ -28,10 +28,10 @@ export default function Game(): JSX.Element {
   }
   useEffect((): void => {
     fetchGame()
-  }, [])
+  })
 
   if (error !== null) {
-    return <Error message={error} />
+    return <ErrorMessage message={error} />
   }
 
   if (game === null) {

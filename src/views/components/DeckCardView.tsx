@@ -1,15 +1,15 @@
 import * as React from "react"
 import { FormEvent, JSX } from "react"
-import CardInterface from "../../lib/dto/CardInterface"
 import { NumberField } from "@base-ui-components/react/number-field"
 
+import DeckCard from "../../lib/dto/DeckCard"
+
 type Props = {
-  card: CardInterface
-  count: number
+  card: DeckCard
   onChange: (value: number) => void
 }
 
-export default function DeckCardView({card, count, onChange}: Props): JSX.Element {
+export default function DeckCardView({card, onChange}: Props): JSX.Element {
   const handleChange = (e: FormEvent<HTMLInputElement>): void => {
     const target: HTMLInputElement = e.target as HTMLInputElement
     const n: number = Number(target.value)
@@ -20,11 +20,11 @@ export default function DeckCardView({card, count, onChange}: Props): JSX.Elemen
     onChange(n)
   }
   const handleIncrease = (): void => {
-    onChange(count + 1)
+    onChange(card.count + 1)
   }
 
   const handleDecrease = (): void => {
-    onChange(count - 1)
+    onChange(card.count - 1)
   }
 
   return <>
@@ -36,7 +36,7 @@ export default function DeckCardView({card, count, onChange}: Props): JSX.Elemen
         <NumberField.Decrement onClick={handleDecrease}>
           -
         </NumberField.Decrement>
-        <NumberField.Input value={count} onInput={handleChange}/>
+        <NumberField.Input value={card.count} onInput={handleChange}/>
         <NumberField.Increment onClick={handleIncrease}>
           +
         </NumberField.Increment>

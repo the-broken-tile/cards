@@ -1,5 +1,5 @@
 import React, { JSX, useEffect, useState } from "react"
-import { useParams } from "react-router"
+import {useParams, useNavigate, NavigateFunction} from "react-router"
 
 import { IDCodec } from "../../lib/encoding/id-codec"
 import { gameRepository } from "../../lib/container"
@@ -9,51 +9,46 @@ import DeckCard from "../../lib/dto/DeckCard"
 
 import Loading from "../components/Loading"
 import DeckView from "../components/DeckView"
-import Error from "../components/Error"
+import ErrorMessage from "../components/ErrorMessage"
 
 export default function Deck(): JSX.Element {
-  const { name, encoded } = useParams()
-  const [ids, setIds] = useState<number[]>([])
+  const navigate: NavigateFunction = useNavigate()
+
+  const { slug, encoded } = useParams()
   const [error, setError] = useState<string|null>(null)
   const [game, setGame] = useState<GameInterface|null>(null)
   const [deck, setDeck] = useState<DeckModel|null>(null)
 
   const fetchGame = async (): Promise<void> => {
-    const g: GameInterface = await gameRepository.get(name as string)
+    const g: GameInterface = await gameRepository.get(slug as string)
     setGame(g)
   }
 
   useEffect((): void => {
+    fetchGame()
+  }, [slug])
+
+  useEffect((): void => {
+    if (game === null || encoded === undefined) {
+      return
+    }
+
     try {
-      setIds(IDCodec.decodeFromString(encoded as string))
+      setDeck(DeckModel.import(encoded, game))
     } catch (e) {
       setError((e as Error).message)
     }
-  }, [encoded])
-
-  useEffect((): void => {
-    fetchGame()
-  })
-
-  useEffect((): void => {
-    if (game === null) {
-      return
-    }
-
-    setDeck(new DeckModel(game, ids))
-  }, [ids, game])
+  }, [encoded, game])
 
   const handleCardCountChange = (count: number, card: DeckCard): void => {
-    if (deck === null) {
+    if (deck === null || game === null) {
       return
     }
 
-    let c: DeckCard | undefined = deck.get(card)
-    if (c === undefined) {
-      c = deck.add(card, count)
-    }
-    c.count = count
-    setDeck(deck.clone()) // @todo maybe make deck immutable
+    deck.setCardCount(card, count)
+
+    // @todo Known bug, last cards count decrease when another card's count is changed
+    navigate(`/${game.slug}/deck/${deck.export()}`)
   }
 
   if (game === null || deck === null) {
@@ -61,7 +56,7 @@ export default function Deck(): JSX.Element {
   }
 
   if (error) {
-    return <Error message={error} />
+    return <ErrorMessage message={error} />
   }
 
   return <DeckView deck={deck} onCountChange={handleCardCountChange} />

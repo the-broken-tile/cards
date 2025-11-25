@@ -3,6 +3,6 @@ import {JSX} from "react"
 type Props = {
   message?: string
 }
-export default function Error({ message }: Props): JSX.Element {
+export default function ErrorMessage({ message }: Props): JSX.Element {
   return <>{message ?? "Error" }</>
 }

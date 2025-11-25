@@ -13,7 +13,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/:name" element={<Game />} />
-        <Route path="/:name/deck/:encoded" element={<Deck/>} />
+        <Route path="/:slug/deck/:encoded" element={<Deck/>} />
       </Routes>
     </HashRouter>
   </StrictMode>
