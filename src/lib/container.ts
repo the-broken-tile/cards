@@ -30,9 +30,10 @@ import GameRepository from "./repository/GameRepository"
 import NormalizedCardFactory from "./factory/NormalizedCardFactory"
 import CardFactoryManager from "./factory/CardFactoryManager"
 import MinValueValidationRuleFactory from "./factory/validation/MinValueValidationRuleFactory"
-import MaxValueValidationRuleFactory from "./factory/validation/MaxValueValidationRuleFactory";
-import MinValueValidator from "./validation/MinValueValidator";
-import MaxValueValidator from "./validation/MaxValueValidator";
+import MaxValueValidationRuleFactory from "./factory/validation/MaxValueValidationRuleFactory"
+import MinValueValidator from "./validation/MinValueValidator"
+import MaxValueValidator from "./validation/MaxValueValidator"
+import CardRepository from "./repository/CardRepository"
 
 const validationRuleFactory: ValidationRuleFactory = new ValidationRuleFactory([
   new AttributeDefinitionEnumValidationFactory(),
@@ -92,10 +93,12 @@ const gameFactory: GameFactory = new GameFactory(
 )
 
 const gameRepository: GameRepository = new GameRepository(gameFactory)
+const cardRepository: CardRepository = new CardRepository(gameRepository)
 
 export {
   cardFactory,
   gameFactory,
   validator,
-  gameRepository
+  gameRepository,
+  cardRepository,
 }
